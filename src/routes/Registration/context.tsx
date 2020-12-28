@@ -2,7 +2,7 @@ import React, { createContext, FormEvent, useCallback, useEffect, useMemo, useRe
 import { IUserData } from 'greenpeace';
 import { useParams, withRouter, RouteComponentProps, useHistory } from 'react-router';
 import { ContextActionType, initialState, reducer } from './reducer';
-import { submitData, IResponse } from './service';
+import { submitData, submitDataWithSteps, IResponse } from './service';
 import {
   validateAmount,
   validateCreditCard,
@@ -61,7 +61,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   const validate = useCallback((stepId: number): boolean => {
-    const { totalAmount, otherAmount, email, firstName, lastName, areaCode, phoneNumber, creditCard, citizenId } = data;
+    const { totalAmount, otherAmount, email, nombre, apellido, telefono_area, phoneNumber, tarjeta_numero, tarjeta_dni } = data;
     if(!data) {
       dispatch({type: 'SET_ERROR', error: 'Se deberán completar los campos.'});
     } else {
@@ -71,11 +71,11 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             dispatch({type: 'SET_ERROR', error: 'Monto incorrecto'});
           } else if(!validateEmail(email)) {
             dispatch({type: 'SET_ERROR', error: 'Correo eléctronico inválido'});
-          } else if(!validateFirstName(firstName)) {
+          } else if(!validateFirstName(nombre)) {
             dispatch({type: 'SET_ERROR', error: 'Nombre incorrecto'});
-          } else if(!validateLastName(lastName)) {
+          } else if(!validateLastName(apellido)) {
             dispatch({type: 'SET_ERROR', error: 'Apellido incorrecto'});
-          } else if(!validateAreaCode(areaCode)) {
+          } else if(!validateAreaCode(telefono_area)) {
             dispatch({type: 'SET_ERROR', error: 'Código de área incorrecto'});
           } else if(!validatePhoneNumber(phoneNumber)) {
             dispatch({type: 'SET_ERROR', error: 'Teléfono incorrecto'});
@@ -85,9 +85,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           }
           break;
         case 2:
-          if(!validateCreditCard(creditCard)) {
+          if(!validateCreditCard(tarjeta_numero)) {
             dispatch({type: 'SET_ERROR', error: 'Tarjeta inválida'});
-          } else if(!validateCitizenId(citizenId)) {
+          } else if(!validateCitizenId(tarjeta_dni)) {
             dispatch({type: 'SET_ERROR', error: 'DNI inválido'});
           } else {
             dispatch({type: 'SET_ERROR', error: null});
@@ -105,34 +105,88 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     dispatch,
   ]);
 
+  // const goNext = useCallback(async (evt: FormEvent<any>) => {
+  //   evt.preventDefault();
+  //   const isValid = validate(currentStep);
+  //   if(isValid) {
+  //     dispatch({ type: 'SUBMIT'});
+  //     const { email, nombre, apellido, totalAmount, otherAmount } = data;
+  //     let submitted = false;
+      
+  //     switch(currentStep) { 
+  //       case 1:
+  //         const resStep1: IResponse = await submitData({
+  //           email,
+  //           nombre,
+  //           apellido,
+  //           totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
+  //         },
+  //         postId,
+  //         refParam,
+  //         );
+          
+  //         if(resStep1 && resStep1.post_id) {
+  //           setPostId(resStep1.post_id);
+  //           submitted = resStep1.submitted;
+  //         }
+
+  //         break;
+  //       case 2:
+  //         const resStep2: IResponse = await submitData(data, postId, refParam);
+  //         if(resStep2) {
+  //           submitted = resStep2.submitted;
+  //         }
+  //         break;
+  //     }
+  //     if(submitted) {
+  //       dispatch({ type: 'SUBMITTED' });
+  //       if(currentStep < steps.length) {
+  //         history.push(`/registration/step/${currentStep + 1}`);
+  //       } else {
+  //         history.push(`/thank-you`);
+  //       }
+  //     } else {
+  //       dispatch({ type: 'SET_ERROR', error: 'Algo salió mal.' });
+  //     }
+  //   }
+  // }, [
+  //   data,
+  //   postId,
+  //   currentStep,
+  //   history,
+  //   refParam,
+  //   validate,
+  //   dispatch,
+  // ]);
+
   const goNext = useCallback(async (evt: FormEvent<any>) => {
     evt.preventDefault();
     const isValid = validate(currentStep);
     if(isValid) {
       dispatch({ type: 'SUBMIT'});
-      const { email, firstName, lastName, totalAmount, otherAmount } = data;
+      // const { email, nombre, apellido, totalAmount, otherAmount } = data;
       let submitted = false;
       
       switch(currentStep) { 
         case 1:
-          const resStep1: IResponse = await submitData({
-            email,
-            firstName,
-            lastName,
-            totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
-          },
-          postId,
-          refParam,
-          );
+          // const resStep1: IResponse = await submitData({
+          //   email,
+          //   nombre,
+          //   apellido,
+          //   totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
+          // },
+          // refParam,
+          // );
           
-          if(resStep1 && resStep1.post_id) {
-            setPostId(resStep1.post_id);
-            submitted = resStep1.submitted;
-          }
+          // if(resStep1 && resStep1.post_id) {
+          //   setPostId(resStep1.post_id);
+          //   submitted = resStep1.submitted;
+          // }
+          submitted = true;
 
           break;
         case 2:
-          const resStep2: IResponse = await submitData(data, postId, refParam);
+          const resStep2: IResponse = await submitData(data, refParam);
           if(resStep2) {
             submitted = resStep2.submitted;
           }

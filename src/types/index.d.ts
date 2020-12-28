@@ -45,13 +45,13 @@ export type SharedActions =
   | { type: 'FAILURE', error: any }
 
 interface IUserData {
-  areaCode?: string;
-  citizenId?: string;
-  creditCard?: string;
+  telefono_area?: string;
+  tarjeta_dni?: string;
+  tarjeta_numero?: string;
   donationFor?: string;
   email?: string;
-  firstName?: string;
-  lastName?: string;
+  nombre?: string;
+  apellido?: string;
   otherAmount?: string;
   phoneNumber?: string;
   totalAmount?: string;

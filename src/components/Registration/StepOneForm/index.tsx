@@ -7,10 +7,10 @@ import Wrapper from '@bit/meema.ui-components.elements';
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
     data: {
-      areaCode,
+      telefono_area,
       email,
-      firstName,
-      lastName,
+      nombre,
+      apellido,
       otherAmount,
       phoneNumber,
       totalAmount,
@@ -82,13 +82,13 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       </FormGroup>
       
       <FormGroup>
-        <label htmlFor="firstName" />
-        <Input type='text' name='firstName' value={firstName} placeholder='Nombre' onChange={onChange} />
+        <label htmlFor="nombre" />
+        <Input type='text' name='nombre' value={nombre} placeholder='Nombre' onChange={onChange} />
       </FormGroup>
       
       <FormGroup>
-        <label htmlFor="lastName" />
-        <Input type='text' name='lastName' value={lastName} placeholder='Apellido' onChange={onChange} />
+        <label htmlFor="apellido" />
+        <Input type='text' name='apellido' value={apellido} placeholder='Apellido' onChange={onChange} />
       </FormGroup>
 
       <FormGroup
@@ -101,11 +101,11 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 30%;
           `}
         >
-          <label htmlFor="areaCode" />
+          <label htmlFor="telefono_area" />
           <Input
             type='text'
-            name='areaCode'
-            value={areaCode}
+            name='telefono_area'
+            value={telefono_area}
             placeholder='Cód Área'
             onChange={onChange}
           />
@@ -127,10 +127,10 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       </FormGroup>
     </FormWrapperStep>
   ), [
-    areaCode,
+    telefono_area,
     email,
-    firstName,
-    lastName,
+    nombre,
+    apellido,
     otherAmount,
     phoneNumber,
     totalAmount,
