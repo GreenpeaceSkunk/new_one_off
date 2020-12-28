@@ -1,12 +1,11 @@
 import TagManager from 'react-gtm-module'
-import {EventType} from 'greenpeace';
+import { EventType } from 'greenpeace';
 
-export const initializeTagManager = () => {
-  const tagManagerArgs = { gtmId: 'GTM-PZMPZ6C' };
+export const initialize = () => {
+  const tagManagerArgs = { gtmId: `${process.env.REACT_APP_GOOGLE_TAG_MANAGER}` };
   TagManager.initialize(tagManagerArgs);
 }
 
 export const pushToDataLayer = (event: EventType) => {
-  console.log("Data Layer Event", event)
-  // Window.dataLayer.push(event);
+  window.dataLayer.push({event});
 }

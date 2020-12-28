@@ -2,38 +2,37 @@
 
 import { createGlobalStyle, DefaultTheme } from "styled-components";
 import { 
+  fontPrimaryLight,
   fontPrimaryRegular,
   fontPrimaryBold,
   fontPrimaryMedium,
-  fontSecondaryRegular,
 } from 'greenpeace-ui-themes';
-// import { fontFace } from '../fonts/index';
 
-import PaytoneOneRegularFont from '../fonts/PaytoneOne/Paytone-One-Regular.ttf';
-import RobotoMediumFont from '../fonts/Roboto/Roboto-Medium.ttf';
+import RobotoLightFont from '../fonts/Roboto/Roboto-Light.ttf';
 import RobotoRegularFont from '../fonts/Roboto/Roboto-Regular.ttf';
+import RobotoMediumFont from '../fonts/Roboto/Roboto-Medium.ttf';
 import RobotoBoldFont from '../fonts/Roboto/Roboto-Bold.ttf';
 
 export const GlobalStyle = createGlobalStyle<DefaultTheme>`
 
   @font-face {
-    font-family: ${fontPrimaryMedium};
-    src: url(${RobotoMediumFont});
+    font-family: ${fontPrimaryLight};
+    src: url(${RobotoLightFont});
   }
-  
+
   @font-face {
     font-family: ${fontPrimaryRegular};
     src: url(${RobotoRegularFont});
   }
   
   @font-face {
-    font-family: ${fontPrimaryBold};
-    src: url(${RobotoBoldFont});
+    font-family: ${fontPrimaryMedium};
+    src: url(${RobotoMediumFont});
   }
   
   @font-face {
-    font-family: ${fontSecondaryRegular};
-    src: url(${PaytoneOneRegularFont});
+    font-family: ${fontPrimaryBold};
+    src: url(${RobotoBoldFont});
   }
 
   body {
