@@ -8,18 +8,6 @@ export type ContextActionType =
 | SharedActions;
 
 export const initialState: ContextStateType = {
-  // data: {
-  //   areaCode: '',
-  //   citizenId: '',
-  //   creditCard: '',
-  //   donationFor: '',
-  //   email: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   otherAmount: '',
-  //   phoneNumber: '',
-  //   totalAmount: '399',
-  // } as IUserData,
   data: {
     areaCode: '',
     citizenId: '',
