@@ -2,8 +2,8 @@ export const validateField = (value = ''): boolean => {
   return (value !== '');
 };
 
-export const validateAmount = (totalAmount = '', otherAmount = ''): boolean => {
-  return !(totalAmount === 'otherAmount' && otherAmount === '');
+export const validateAmount = (monto = '', otherAmount = ''): boolean => {
+  return !(monto === 'otherAmount' && otherAmount === '');
 }
 
 export const validateFirstName = (value = ''): boolean => {

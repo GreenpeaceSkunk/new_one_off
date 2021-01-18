@@ -61,13 +61,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   const validate = useCallback((stepId: number): boolean => {
-    const { totalAmount, otherAmount, email, nombre, apellido, telefono_area, phoneNumber, tarjeta_numero, tarjeta_dni } = data;
+    const { monto, otherAmount, email, nombre, apellido, cod_area, telefono, creditCardNumber, dni } = data;
     if(!data) {
       dispatch({type: 'SET_ERROR', error: 'Se deberán completar los campos.'});
     } else {
       switch (stepId) {        
         case 1:
-          if(!validateAmount(totalAmount, otherAmount)) {
+          if(!validateAmount(monto, otherAmount)) {
             dispatch({type: 'SET_ERROR', error: 'Monto incorrecto'});
           } else if(!validateEmail(email)) {
             dispatch({type: 'SET_ERROR', error: 'Correo eléctronico inválido'});
@@ -75,9 +75,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             dispatch({type: 'SET_ERROR', error: 'Nombre incorrecto'});
           } else if(!validateLastName(apellido)) {
             dispatch({type: 'SET_ERROR', error: 'Apellido incorrecto'});
-          } else if(!validateAreaCode(telefono_area)) {
+          } else if(!validateAreaCode(cod_area)) {
             dispatch({type: 'SET_ERROR', error: 'Código de área incorrecto'});
-          } else if(!validatePhoneNumber(phoneNumber)) {
+          } else if(!validatePhoneNumber(telefono)) {
             dispatch({type: 'SET_ERROR', error: 'Teléfono incorrecto'});
           } else {
             dispatch({type: 'SET_ERROR', error: null});
@@ -85,9 +85,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           }
           break;
         case 2:
-          if(!validateCreditCard(tarjeta_numero)) {
+          if(!validateCreditCard(creditCardNumber)) {
             dispatch({type: 'SET_ERROR', error: 'Tarjeta inválida'});
-          } else if(!validateCitizenId(tarjeta_dni)) {
+          } else if(!validateCitizenId(dni)) {
             dispatch({type: 'SET_ERROR', error: 'DNI inválido'});
           } else {
             dispatch({type: 'SET_ERROR', error: null});
@@ -110,7 +110,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   //   const isValid = validate(currentStep);
   //   if(isValid) {
   //     dispatch({ type: 'SUBMIT'});
-  //     const { email, nombre, apellido, totalAmount, otherAmount } = data;
+  //     const { email, nombre, apellido, monto, otherAmount } = data;
   //     let submitted = false;
       
   //     switch(currentStep) { 
@@ -119,7 +119,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   //           email,
   //           nombre,
   //           apellido,
-  //           totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
+  //           monto: (monto === 'otherAmount') ? otherAmount : monto,
   //         },
   //         postId,
   //         refParam,
@@ -164,7 +164,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     const isValid = validate(currentStep);
     if(isValid) {
       dispatch({ type: 'SUBMIT'});
-      // const { email, nombre, apellido, totalAmount, otherAmount } = data;
+      // const { email, nombre, apellido, monto, otherAmount } = data;
       let submitted = false;
       
       switch(currentStep) { 
@@ -173,7 +173,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           //   email,
           //   nombre,
           //   apellido,
-          //   totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
+          //   monto: (monto === 'otherAmount') ? otherAmount : monto,
           // },
           // refParam,
           // );
