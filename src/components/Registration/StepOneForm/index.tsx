@@ -7,13 +7,13 @@ import Wrapper from '@bit/meema.ui-components.elements';
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
     data: {
-      telefono_area,
+      cod_area,
       email,
       nombre,
       apellido,
       otherAmount,
-      phoneNumber,
-      totalAmount,
+      telefono,
+      monto,
     },
     onChange,
   } = useContext(RegistrationContext);
@@ -22,14 +22,14 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
 
   useEffect(() => {
     const isDefaultAmount = (
-      totalAmount === '399'
-      || totalAmount === '699'
-      || totalAmount === '1999'
-      || totalAmount === '2999'
+      monto === '399'
+      || monto === '699'
+      || monto === '1999'
+      || monto === '2999'
     ) as boolean; 
     setDisabledOtherAmount(isDefaultAmount);
   }, [
-    totalAmount,
+    monto,
   ]);
 
   return useMemo(() => (
@@ -45,10 +45,10 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 40%;
           `}
         >
-          <label htmlFor="totalAmount" />
+          <label htmlFor="monto" />
           <Select
-            name='totalAmount'
-            value={totalAmount}
+            name='monto'
+            value={monto}
             onChange={onChange}
           >
             <option value='399'>$399</option>
@@ -101,11 +101,11 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 30%;
           `}
         >
-          <label htmlFor="telefono_area" />
+          <label htmlFor="cod_area" />
           <Input
             type='text'
-            name='telefono_area'
-            value={telefono_area}
+            name='cod_area'
+            value={cod_area}
             placeholder='Cód Área'
             onChange={onChange}
           />
@@ -115,11 +115,11 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 65%;
           `}
         >
-          <label htmlFor="phoneNumber" />
+          <label htmlFor="telefono" />
           <Input
             type='number'
-            name='phoneNumber'
-            value={phoneNumber}
+            name='telefono'
+            value={telefono}
             placeholder='Telefono'
             onChange={onChange}
           />
@@ -127,13 +127,13 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       </FormGroup>
     </FormWrapperStep>
   ), [
-    telefono_area,
+    cod_area,
     email,
     nombre,
     apellido,
     otherAmount,
-    phoneNumber,
-    totalAmount,
+    telefono,
+    monto,
     disabledOtherAmount,
     onChange,
   ]);

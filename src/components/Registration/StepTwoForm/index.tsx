@@ -7,8 +7,8 @@ import { RegistrationContext } from '../../../routes/Registration/context';
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
     data: {
-      tarjeta_numero,
-      tarjeta_dni,
+      creditCardNumber,
+      dni,
       donationFor,
     },
     onChange,
@@ -18,10 +18,10 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     <FormWrapperStep>
       <FormLabel>Datos de pago</FormLabel>
       <Wrapper>
-        <label htmlFor="tarjeta_numero" />
-        <Input type='string' name='tarjeta_numero' maxLength={16} value={tarjeta_numero} placeholder='Número de tarjeta' onChange={onChange} />
-        <label htmlFor="tarjeta_dni" />
-        <Input type='string' name='tarjeta_dni' maxLength={8} value={tarjeta_dni} placeholder='DNI' onChange={onChange} />
+        <label htmlFor="creditCardNumber" />
+        <Input type='string' name='creditCardNumber' maxLength={16} value={creditCardNumber} placeholder='Número de tarjeta' onChange={onChange} />
+        <label htmlFor="dni" />
+        <Input type='string' name='dni' maxLength={8} value={dni} placeholder='DNI' onChange={onChange} />
       </Wrapper>
       <Wrapper
         customCss={css`
@@ -47,8 +47,8 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       </Wrapper>
     </FormWrapperStep>
   ), [
-    tarjeta_numero,
-    tarjeta_dni,
+    creditCardNumber,
+    dni,
     donationFor,
     onChange,
   ]);

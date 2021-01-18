@@ -61,13 +61,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   const validate = useCallback((stepId: number): boolean => {
-    const { totalAmount, otherAmount, email, nombre, apellido, telefono_area, phoneNumber, tarjeta_numero, tarjeta_dni } = data;
+    const { monto, otherAmount, email, nombre, apellido, cod_area, telefono, creditCardNumber, dni } = data;
     if(!data) {
       dispatch({type: 'SET_ERROR', error: 'Se deberán completar los campos.'});
     } else {
       switch (stepId) {        
         case 1:
-          if(!validateAmount(totalAmount, otherAmount)) {
+          if(!validateAmount(monto, otherAmount)) {
             dispatch({type: 'SET_ERROR', error: 'Monto incorrecto'});
           } else if(!validateEmail(email)) {
             dispatch({type: 'SET_ERROR', error: 'Correo eléctronico inválido'});
@@ -75,9 +75,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             dispatch({type: 'SET_ERROR', error: 'Nombre incorrecto'});
           } else if(!validateLastName(apellido)) {
             dispatch({type: 'SET_ERROR', error: 'Apellido incorrecto'});
-          } else if(!validateAreaCode(telefono_area)) {
+          } else if(!validateAreaCode(cod_area)) {
             dispatch({type: 'SET_ERROR', error: 'Código de área incorrecto'});
-          } else if(!validatePhoneNumber(phoneNumber)) {
+          } else if(!validatePhoneNumber(telefono)) {
             dispatch({type: 'SET_ERROR', error: 'Teléfono incorrecto'});
           } else {
             dispatch({type: 'SET_ERROR', error: null});
@@ -85,9 +85,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           }
           break;
         case 2:
-          if(!validateCreditCard(tarjeta_numero)) {
+          if(!validateCreditCard(creditCardNumber)) {
             dispatch({type: 'SET_ERROR', error: 'Tarjeta inválida'});
-          } else if(!validateCitizenId(tarjeta_dni)) {
+          } else if(!validateCitizenId(dni)) {
             dispatch({type: 'SET_ERROR', error: 'DNI inválido'});
           } else {
             dispatch({type: 'SET_ERROR', error: null});
@@ -110,29 +110,14 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   //   const isValid = validate(currentStep);
   //   if(isValid) {
   //     dispatch({ type: 'SUBMIT'});
-  //     const { email, nombre, apellido, totalAmount, otherAmount } = data;
   //     let submitted = false;
       
   //     switch(currentStep) { 
   //       case 1:
-  //         const resStep1: IResponse = await submitData({
-  //           email,
-  //           nombre,
-  //           apellido,
-  //           totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
-  //         },
-  //         postId,
-  //         refParam,
-  //         );
-          
-  //         if(resStep1 && resStep1.post_id) {
-  //           setPostId(resStep1.post_id);
-  //           submitted = resStep1.submitted;
-  //         }
-
+  //         submitted = true;
   //         break;
   //       case 2:
-  //         const resStep2: IResponse = await submitData(data, postId, refParam);
+  //         const resStep2: IResponse = await submitData(data, refParam);
   //         if(resStep2) {
   //           submitted = resStep2.submitted;
   //         }
@@ -164,29 +149,53 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     const isValid = validate(currentStep);
     if(isValid) {
       dispatch({ type: 'SUBMIT'});
-      // const { email, nombre, apellido, totalAmount, otherAmount } = data;
+      const {
+        apellido,
+        cod_area,
+        creditCardNumber,
+        dni,
+        email,
+        monto,
+        nombre,
+        otherAmount,
+        telefono,
+      } = data;
       let submitted = false;
       
       switch(currentStep) { 
         case 1:
-          // const resStep1: IResponse = await submitData({
-          //   email,
-          //   nombre,
-          //   apellido,
-          //   totalAmount: (totalAmount === 'otherAmount') ? otherAmount : totalAmount,
-          // },
-          // refParam,
-          // );
+          const resStep1: IResponse = await submitDataWithSteps(
+            {
+              apellido,
+              email,
+              monto: (monto === 'otherAmount') ? otherAmount : monto,
+              nombre,
+            },
+            postId,
+            refParam,
+          );
           
-          // if(resStep1 && resStep1.post_id) {
-          //   setPostId(resStep1.post_id);
-          //   submitted = resStep1.submitted;
-          // }
-          submitted = true;
+          if(resStep1 && resStep1.post_id) {
+            setPostId(resStep1.post_id);
+            submitted = resStep1.submitted;
+          }
 
           break;
         case 2:
-          const resStep2: IResponse = await submitData(data, refParam);
+          const resStep2: IResponse = await submitDataWithSteps(
+            {
+              apellido,
+              cod_area,
+              creditCardNumber,
+              dni,
+              email,
+              monto,
+              nombre,
+              telefono,
+            },
+            postId,
+            refParam
+          );
           if(resStep2) {
             submitted = resStep2.submitted;
           }
@@ -212,7 +221,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     validate,
     dispatch,
   ]);
-  
+
   const goBack = useCallback((evt: FormEvent<any>) => {
     evt.preventDefault();
     history.push(`/registration/step/${currentStep - 1}`);

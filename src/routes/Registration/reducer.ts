@@ -8,44 +8,17 @@ export type ContextActionType =
 | SharedActions;
 
 export const initialState: ContextStateType = {
-  // data: {
-  //   areaCode: '',
-  //   citizenId: '',
-  //   creditCard: '',
-  //   donationFor: '',
-  //   email: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   otherAmount: '',
-  //   phoneNumber: '',
-  //   totalAmount: '399',
-  // } as IUserData,
-
-  /*
-Importe= string
-Monto= numero
-email= string
-nombre= string
-apellido= string
-donationFor= string
-ref= string
-telefono_numero= string
-telefono_area= string
-tarjeta_numero= numero
-tarjeta_dni= string
-
-  */
   data: {
-    telefono_area: '',
-    tarjeta_dni: '',
-    tarjeta_numero: '',
+    cod_area: '',
+    dni: '',
+    creditCardNumber: '',
     donationFor: '',
     email: '',
     nombre: '',
     apellido: '',
     otherAmount: '',
-    phoneNumber: '',
-    totalAmount: '399',
+    telefono: '',
+    monto: '399',
   } as IUserData,
   submitting: false,
   submitted: false,
@@ -60,7 +33,7 @@ export const reducer: GenericReducerFn<ContextStateType, ContextActionType> = (s
         data: {
           ...state.data,
           ...action.payload,
-          ...(action.payload['totalAmount']) && {
+          ...(action.payload['monto']) && {
             otherAmount: '',
           },
         } as IUserData,
