@@ -151,6 +151,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       dispatch({ type: 'SUBMIT'});
       const {
         apellido,
+        campania,
         cod_area,
         creditCardNumber,
         dni,
@@ -185,6 +186,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           const resStep2: IResponse = await submitDataWithSteps(
             {
               apellido,
+              campania,
               cod_area,
               creditCardNumber,
               dni,
