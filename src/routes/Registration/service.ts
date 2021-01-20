@@ -21,6 +21,8 @@ export const submitData = async  (data?: IUserData, refParam = `${process.env.RE
     }
   }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   const response = await ApiCall<AxiosResquestError | any>({
     url: 'procesar_cupon.php',
     method: 'POST',
@@ -39,6 +41,45 @@ export const submitData = async  (data?: IUserData, refParam = `${process.env.RE
     return {
       submitted: true,
     };
+=======
+  // const response = await ApiCall<AxiosResquestError | any>({
+  //   url: 'procesar_cupon_en_pasos_ajax.php',
+  //   method: 'POST',
+  //   data: formData,
+  //   headers: {
+  //     'Content-Type': 'multipart/form-data'
+  //   },
+  //   params: {},
+  // });
+
+=======
+  // const response = await ApiCall<AxiosResquestError | any>({
+  //   url: 'procesar_cupon_en_pasos_ajax.php',
+  //   method: 'POST',
+  //   data: formData,
+  //   headers: {
+  //     'Content-Type': 'multipart/form-data'
+  //   },
+  //   params: {},
+  // });
+
+>>>>>>> Stashed changes
+  // if(response.error) {
+  //   return {
+  //     submitted: false,
+  //   }
+  // } else {
+  //   return {
+  //     submitted: true,
+  //     post_id: response.post_id || post_id,
+  //   };
+  // }
+  return {
+    submitted: true,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   }
 };
 
