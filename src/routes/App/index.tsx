@@ -32,6 +32,7 @@ const App: React.FunctionComponent<{}> = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    console.log(pathname);
     trackEvent('PageView');
     pushToDataLayer('pageview');
   }, [ pathname ]);

@@ -9,7 +9,6 @@ export interface IResponse {
 export const submitData = async  (data?: IUserData, refParam = `${process.env.REACT_APP_DEFAULT_REF_PARAM}`): Promise<IResponse> => {
 
   let formData = new FormData();
-
   formData.append('form_id', `${process.env.REACT_APP_FORM_ID}`);
   formData.append('ref', `${refParam}`);
 
@@ -56,7 +55,6 @@ export const submitDataWithSteps = async  (data?: IUserData, post_id?: number, r
       }
     }
   }
-console.log(formData.get('monto'));
   const response = await ApiCall<AxiosResquestError | any>({
     url: 'procesar_cupon_en_pasos_ajax.php',
     method: 'POST',
@@ -78,4 +76,3 @@ console.log(formData.get('monto'));
     };
   }
 };
-
