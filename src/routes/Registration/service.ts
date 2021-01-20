@@ -32,7 +32,6 @@ export const submitDataWithSteps = async  (data?: IUserData, post_id?: number, r
     params: {},
   });
 
-  console.log(response);
   if(response.error) {
     return {
       submitted: false,
@@ -70,7 +69,6 @@ export const submitData = async  (data?: IUserData, refParam = `${process.env.RE
     params: {},
   });
 
-  console.log(response);
   if(response.error) {
     return {
       submitted: false,

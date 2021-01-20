@@ -2,7 +2,7 @@ import React, { createContext, FormEvent, useCallback, useEffect, useMemo, useRe
 import { IUserData } from 'greenpeace';
 import { useParams, withRouter, RouteComponentProps, useHistory } from 'react-router';
 import { ContextActionType, initialState, reducer } from './reducer';
-import { submitData, submitDataWithSteps, IResponse } from './service';
+import { submitDataWithSteps, IResponse } from './service';
 import {
   validateAmount,
   validateCreditCard,
@@ -159,6 +159,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
         nombre,
         otherAmount,
         telefono,
+        campania,
       } = data;
       let submitted = false;
       
@@ -192,6 +193,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
               monto,
               nombre,
               telefono,
+              campania,
             },
             postId,
             refParam

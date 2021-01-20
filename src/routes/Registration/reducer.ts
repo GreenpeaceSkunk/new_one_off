@@ -12,7 +12,7 @@ export const initialState: ContextStateType = {
     cod_area: '',
     dni: '',
     creditCardNumber: '',
-    donationFor: '',
+    campania: '',
     email: '',
     nombre: '',
     apellido: '',
