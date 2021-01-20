@@ -12,6 +12,7 @@ import {
   validateCitizenId,
   validateAreaCode,
   validatePhoneNumber,
+  parseAmount,
 } from './utils';
 import { AppContext } from '../App/context';
 
@@ -169,7 +170,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             {
               apellido,
               email,
-              monto: (monto === 'otherAmount') ? otherAmount : monto,
+              monto: parseAmount(monto, otherAmount),
               nombre,
             },
             postId,
@@ -190,7 +191,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
               creditCardNumber,
               dni,
               email,
-              monto,
+              monto: parseAmount(monto, otherAmount),
               nombre,
               telefono,
               campania,
