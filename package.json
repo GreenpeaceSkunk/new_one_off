@@ -7,7 +7,7 @@
     "email": "dtovbein@gmail.com",
     "url": "https://github.com/dantovbein"
   },
-  "homepage": ".",
+  "homepage": "/sk/one_off/",
   "dependencies": {
     "@bit/meema.ui-components.carousel": "0.0.12",
     "@bit/meema.ui-components.elements": "0.0.24",
