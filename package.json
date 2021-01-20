@@ -1,13 +1,13 @@
 {
   "name": "new_one_off_sp",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "author": {
     "name": "Dan Tovbein",
     "email": "dtovbein@gmail.com",
     "url": "https://github.com/dantovbein"
   },
-  "homepage": "/sk/one_off/",
+  "homepage": ".",
   "dependencies": {
     "@bit/meema.ui-components.carousel": "0.0.12",
     "@bit/meema.ui-components.elements": "0.0.24",
