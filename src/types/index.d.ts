@@ -48,7 +48,7 @@ interface IUserData {
   cod_area?: string;
   dni?: string;
   creditCardNumber?: string;
-  donationFor?: string;
+  campania?: string;
   email?: string;
   nombre?: string;
   apellido?: string;

@@ -9,7 +9,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     data: {
       creditCardNumber,
       dni,
-      donationFor,
+      campania,
     },
     onChange,
   } = useContext(RegistrationContext);
@@ -31,10 +31,10 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       >
         <FormLabel>¿A qué fin te gustaría que destinemos tu donación?</FormLabel>
         <Wrapper>
-          <label htmlFor="donationFor" />
+          <label htmlFor="campania" />
           <Select
-            name='donationFor'
-            value={donationFor}
+            name='campania'
+            value={campania}
             onChange={onChange}
           >
             <option>Seleccione una opción</option>
@@ -49,7 +49,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
   ), [
     creditCardNumber,
     dni,
-    donationFor,
+    campania,
     onChange,
   ]);
 }
