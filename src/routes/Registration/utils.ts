@@ -55,3 +55,6 @@ export const validateEmail = (value = ''): boolean => {
   return false;
 }
 
+export const parseAmount = (value1?: string, value2?: string) => {
+  return (value1 === 'otherAmount') ? value2 : value1;
+}
