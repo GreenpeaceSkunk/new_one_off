@@ -48,7 +48,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   const { stepId } = useParams<{ stepId: string }>();
   const [ currentStep, setCurrentStep ] = useState<number>(1);
   const [ postId, setPostId ] = useState<number>(0);
-  const { refParam } = useContext(AppContext);
+  const { refParam, searchParams } = useContext(AppContext);
 
   const onChange = useCallback((evt: OnChangeEvent) => {
     evt.preventDefault();
@@ -206,7 +206,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       if(submitted) {
         dispatch({ type: 'SUBMITTED' });
         if(currentStep < steps.length) {
-          history.push(`/registration/step/${currentStep + 1}`);
+          history.push(`/registration/step/${currentStep + 1}${searchParams}`);
         } else {
           history.push(`/thank-you`);
         }
@@ -220,14 +220,16 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     currentStep,
     history,
     refParam,
+    searchParams,
     validate,
     dispatch,
   ]);
 
   const goBack = useCallback((evt: FormEvent<any>) => {
     evt.preventDefault();
-    history.push(`/registration/step/${currentStep - 1}`);
+    history.push(`/registration/step/${currentStep - 1}${searchParams}`);
   }, [
+    searchParams,
     currentStep,
     history,
   ]);
