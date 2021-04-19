@@ -2,11 +2,22 @@ import { env } from "process";
 
 declare global {
   interface Window {
-      dataLayer: [{
-        event: EventType,
-      }];
+    dataLayer: [{
+      event: EventType,
+    }];
+    
+    dcS: {
+      synchro: any;
+    };
+
+    dc: {
+      track: {
+        event: (portalId: string, eventId: string) => void;
+      }
+    };
   }
 }
+// process.env.REACT_APP_DATA_CRUSH_PORTAL_ID, process.env.REACT_APP_DATA_CRUSH_EVENT_ID);
 
 // export type SearchParamsType = {
 //   ref?: string;

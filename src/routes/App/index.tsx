@@ -12,6 +12,7 @@ import { trackEvent } from '../../utils/facebookPixel';
 import { AppContext, AppProvider } from './context';
 import { initialize as initializeTagManager } from '../../utils/gtm';
 import { initialize as initializeFacebookPixel } from '../../utils/facebookPixel';
+import { initialize as initializeDataCrush } from '../../utils/dataCrush';
 
 const MainHeader = React.lazy(() => import('../../components/Header'));
 const HomeView = React.lazy(() => import('../Home'));
@@ -26,13 +27,13 @@ const Main = styled(Wrapper)`
 
 initializeTagManager();
 initializeFacebookPixel();
+initializeDataCrush();
 
 const App: React.FunctionComponent<{}> = () => {
   const { searchParams } = useContext(AppContext);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(pathname);
     trackEvent('PageView');
     pushToDataLayer('pageview');
   }, [ pathname ]);

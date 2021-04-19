@@ -15,6 +15,7 @@ import {
   parseAmount,
 } from './utils';
 import { AppContext } from '../App/context';
+import { synchroInit } from '../../utils/dataCrush';
 
 
 type OnChangeEvent = MouseEvent<HTMLButtonElement> | ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>;
@@ -106,45 +107,6 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     dispatch,
   ]);
 
-  // const goNext = useCallback(async (evt: FormEvent<any>) => {
-  //   evt.preventDefault();
-  //   const isValid = validate(currentStep);
-  //   if(isValid) {
-  //     dispatch({ type: 'SUBMIT'});
-  //     let submitted = false;
-      
-  //     switch(currentStep) { 
-  //       case 1:
-  //         submitted = true;
-  //         break;
-  //       case 2:
-  //         const resStep2: IResponse = await submitData(data, refParam);
-  //         if(resStep2) {
-  //           submitted = resStep2.submitted;
-  //         }
-  //         break;
-  //     }
-  //     if(submitted) {
-  //       dispatch({ type: 'SUBMITTED' });
-  //       if(currentStep < steps.length) {
-  //         history.push(`/registration/step/${currentStep + 1}`);
-  //       } else {
-  //         history.push(`/thank-you`);
-  //       }
-  //     } else {
-  //       dispatch({ type: 'SET_ERROR', error: 'Algo salió mal.' });
-  //     }
-  //   }
-  // }, [
-  //   data,
-  //   postId,
-  //   currentStep,
-  //   history,
-  //   refParam,
-  //   validate,
-  //   dispatch,
-  // ]);
-
   const goNext = useCallback(async (evt: FormEvent<any>) => {
     evt.preventDefault();
     const isValid = validate(currentStep);
@@ -184,6 +146,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
 
           break;
         case 2:
+          const newAmount = parseAmount(monto, otherAmount);
           const resStep2: IResponse = await submitDataWithSteps(
             {
               apellido,
@@ -191,7 +154,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
               creditCardNumber,
               dni,
               email,
-              monto: parseAmount(monto, otherAmount),
+              monto: newAmount,
               nombre,
               telefono,
               campania,
@@ -201,6 +164,16 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           );
           if(resStep2) {
             submitted = resStep2.submitted;
+            synchroInit({
+              email,
+              first_name: nombre,
+              last_name: apellido,
+              dni,
+              area_code: cod_area,
+              telefono,
+              sk_oneoff_monto: newAmount,
+              sk_pre_socio: '0',
+            });
           }
           break;
       }

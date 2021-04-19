@@ -5,14 +5,17 @@ import { css } from 'styled-components';
 import { backgroundImage } from '../../styles/mixins';
 import { bg_thank_you_page } from '../../lib/images';
 import { pixelToRem, headerHeightNormal } from 'greenpeace-ui-themes';
-import { trackEvent } from '../../utils/facebookPixel';
+import { trackEvent as trackFacebookPixelEvent } from '../../utils/facebookPixel';
+import { trackEvent as trackDataCrushEvent } from '../../utils/dataCrush';
 
 const ThankYou: React.FunctionComponent<{}> = () => {
-  
   useEffect(() => {
-    trackEvent('Donate');
+    trackFacebookPixelEvent('Donate');
+    if(window.dc) {
+      trackDataCrushEvent();
+    }
   }, []);
-
+  
   return useMemo(() => (
     <View
       customCss={css`
