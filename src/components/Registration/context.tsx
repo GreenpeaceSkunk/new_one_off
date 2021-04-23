@@ -50,7 +50,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   const { stepId } = useParams<{ stepId: string }>();
   const [ currentStep, setCurrentStep ] = useState<number>(1);
   const [ postId, setPostId ] = useState<number>(0);
-  const { refParam, searchParams } = useContext(AppContext);
+  const { refParam, queryParams } = useContext(AppContext);
 
   const onChange = useCallback((evt: OnChangeEvent) => {
     evt.preventDefault();
@@ -143,7 +143,6 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             setPostId(resStep1.post_id);
             submitted = resStep1.submitted;
           }
-
           break;
         case 2:
           const newAmount = parseAmount(monto, otherAmount);
@@ -180,7 +179,10 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       if(submitted) {
         dispatch({ type: 'SUBMITTED' });
         if(currentStep < steps.length) {
-          history.push(`/registration/step/${currentStep + 1}${searchParams}`);
+          history.push({
+            pathname: `/registration/step/${currentStep + 1}`,
+            search: queryParams.toString(),
+          });
         } else {
           history.push(`/thank-you`);
         }
@@ -194,16 +196,19 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     currentStep,
     history,
     refParam,
-    searchParams,
+    queryParams,
     validate,
     dispatch,
   ]);
 
   const goBack = useCallback((evt: FormEvent<any>) => {
     evt.preventDefault();
-    history.push(`/registration/step/${currentStep - 1}${searchParams}`);
+    history.push({
+      pathname: `/registration/step/${currentStep - 1}`,
+      search: queryParams.toString(),
+    });
   }, [
-    searchParams,
+    queryParams,
     currentStep,
     history,
   ]);
@@ -213,6 +218,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   }, [
     stepId,
   ]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'UPDATE_USER_DATA',
+      payload: { monto: (queryParams.get('default')) ? `${queryParams.get('default')}` : '699' }
+    });
+  }, []);
 
   return useMemo(() => (
     <Provider value={{

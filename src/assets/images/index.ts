@@ -8,6 +8,10 @@ import TopicBackground5 from './michael-jin-ET6_fDwZj2U-unsplash1.png';
 import TopicBackground6 from './image20.png';
 import TopicBackground7 from './image32.png';
 import TopicBackground8 from './image33.png';
+import CampaignBosques from './campaigns/bosques.jpg';
+import CampaignClimaYEnergia from './campaigns/clima-y-energia.jpg';
+import CampaignContaminacion from './campaigns/contaminacion.jpg';
+import CampaignOceanos from './campaigns/oceanos.png';
 
 export {
   BackgroundHome,
@@ -20,4 +24,8 @@ export {
   TopicBackground7,
   TopicBackground8,
   bg_thank_you_page,
+  CampaignBosques,
+  CampaignClimaYEnergia,
+  CampaignContaminacion,
+  CampaignOceanos,
 }

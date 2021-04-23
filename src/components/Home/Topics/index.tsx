@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { css } from 'styled-components';
-import Wrapper, { H1 } from '@bit/meema.ui-components.elements';
+import { Wrapper, H1 } from '@bit/meema.ui-components.elements';
 import { pixelToRem } from 'greenpeace-ui-themes';
 import { Topic } from './Topic';
 import {
@@ -12,7 +12,7 @@ import {
   TopicBackground6,
   TopicBackground7,
   TopicBackground8,
-} from '../../../lib/images';
+} from '../../../assets/images';
 
 const Topics: FunctionComponent<{}> = () => (
   <Wrapper>

@@ -1,8 +1,8 @@
 import React, { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { Input, FormWrapperStep, FormLabel, FormGroup, Select } from '../Shared';
-import { RegistrationContext } from '../../../routes/Registration/context';
+import { RegistrationContext } from '../context';
 import { css } from 'styled-components';
-import Wrapper from '@bit/meema.ui-components.elements';
+import { Wrapper } from '@bit/meema.ui-components.elements';
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
@@ -17,12 +17,12 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     },
     onChange,
   } = useContext(RegistrationContext);
-
   const [ disabledOtherAmount, setDisabledOtherAmount ] = useState<boolean>(true);
 
   useEffect(() => {
     const isDefaultAmount = (
-      monto === '399'
+      monto === '99'
+      || monto === '399'
       || monto === '699'
       || monto === '1999'
       || monto === '2999'
@@ -51,6 +51,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             value={monto}
             onChange={onChange}
           >
+            <option value='99'>$99</option>
             <option value='399'>$399</option>
             <option value='699'>$699</option>
             <option value='1999'>$1999</option>

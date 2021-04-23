@@ -2,7 +2,7 @@ import React, { memo, useContext, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { css } from 'styled-components';
 import { pixelToRem, colorPrimaryDark } from 'greenpeace-ui-themes';
-import Wrapper from '@bit/meema.ui-components.elements';
+import { Wrapper } from '@bit/meema.ui-components.elements';
 import Carousel from '@bit/meema.ui-components.carousel';
 import Stepper from '@bit/meema.ui-components.stepper';
 import { SubmitNav, Errors, Form, FormButton } from '../../components/Registration/Shared';
@@ -81,7 +81,7 @@ const Component: React.FunctionComponent<{}> = () => {
               </FormButton>
             </Route>
             <Route path='/registration/step/2'>
-              <FormButton onClick={goBack}>
+              <FormButton onClick={goBack} format='text'>
                 Volver
               </FormButton>
               <FormButton disabled={submitting} onClick={goNext} format='contained' primaryColor={colorPrimaryDark}>

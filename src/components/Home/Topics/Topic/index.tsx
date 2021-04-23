@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrapper, { H1, Span, A } from '@bit/meema.ui-components.elements';
+import { Wrapper, H1, Span, A } from '@bit/meema.ui-components.elements';
 import { css } from 'styled-components';
 import { pixelToRem } from 'greenpeace-ui-themes';
 

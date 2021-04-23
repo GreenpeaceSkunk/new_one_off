@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import Wrapper, { Button, Nav, P } from '@bit/meema.ui-components.elements';
+import styled, { css } from 'styled-components';
+import { Wrapper, Button, Nav, P } from '@bit/meema.ui-components.elements';
 import { pixelToRem, borderRadius } from 'greenpeace-ui-themes';
-import { SelectArrowIcon } from '../../../lib/icons';
+import { SelectArrowIcon } from '../../../assets/icons';
 
 export const Form = styled.form`
   flex: 1 0 100%;
@@ -52,11 +52,25 @@ export const Select = styled.select<{width?: string, marginRight?: string}>`
     border-color: ${(props) => props.theme.color.primary.normal};;
   }
 `;
-
+// 'outlined' | 'contained' | 'text';
 export const FormButton = styled(Button)`
   border-radius: ${pixelToRem(borderRadius)};
   padding: ${pixelToRem(6)} ${pixelToRem(27)};
   margin: 0;
+  color: ${({theme}) => theme.color.primary.dark};
+  
+  ${({format}) => (format === 'contained') && css`
+    background-color: ${({theme}) => theme.color.primary.dark};
+    color: white;
+  `}
+  
+  ${({format}) => (format === 'outlined') && css`
+    border-color: ${({theme}) => theme.color.primary.dark};
+    &:hover {
+      background-color: ${({theme}) => theme.color.primary.dark};
+      color: white;
+    }
+  `}
 `;
 
 export const FormGroup = styled(Wrapper)`
@@ -69,6 +83,14 @@ export const SubmitNav = styled(Nav)`
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
+
+  > * {
+    margin-right: ${pixelToRem(10)};
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 `;
 
 export const Errors = styled(Wrapper)`

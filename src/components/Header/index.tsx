@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import Wrapper, { Header } from '@bit/meema.ui-components.elements';
+import { Wrapper, Header } from '@bit/meema.ui-components.elements';
 import { headerHeightNormal, pixelToRem } from 'greenpeace-ui-themes';
 import { css } from 'styled-components';
 
