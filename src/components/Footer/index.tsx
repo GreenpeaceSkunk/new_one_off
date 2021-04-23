@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 import { Footer, Wrapper, Span, A } from '@bit/meema.ui-components.elements';
 import { pixelToRem, footerHeightNormal } from 'greenpeace-ui-themes';
 import { Logo } from '../../components/Shared';
-import { PeopleIcon } from '../../lib/icons';
+import { PeopleIcon } from '../../assets/icons';
 import SocialMediaNavs from '../SocialMediaNav';
 import { alignMiddle } from '../../styles/mixins';
 
@@ -117,6 +117,7 @@ const MainFooter = () => (
       <Span customCss={css`
         font-size: ${pixelToRem(24)};
         margin-bottom: 1rem;
+        color: white;
       `}>¡COMPARTÍ!</Span>
       <SocialMediaNavs />
       <Span
@@ -124,7 +125,8 @@ const MainFooter = () => (
           text-align: center;
           width: 100%;
           margin-top: 1rem;
-          font-size: ${pixelToRem(14)};
+          color: white;
+
         `}
       >NUESTRO PLANETA NECESITA MÁS PERSONAS COMO VOS</Span>
     </Wrapper>
