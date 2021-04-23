@@ -1,4 +1,7 @@
+import { Wrapper } from '@bit/meema.ui-components.elements';
+import { pixelToRem } from 'meema.utils';
 import React from 'react';
+import { css } from 'styled-components';
 
 interface IProps {}
 interface IState { hasError: boolean }
@@ -20,7 +23,13 @@ class ErrorBoundary extends React.Component<IProps, IState> {
 
   render() {
     if (this.state.hasError) {
-      return <h1>Ops, algo salió mal..</h1>;
+      return (
+        <Wrapper
+          customCss={css`
+            padding: ${pixelToRem(50)};
+          `}
+        >Oops, algo salió mal..</Wrapper>
+      )
     }
 
     return this.props.children; 
