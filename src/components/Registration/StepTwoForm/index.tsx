@@ -2,7 +2,7 @@ import React, { memo, useContext, useMemo } from 'react';
 import { css } from 'styled-components';
 import { Wrapper } from '@bit/meema.ui-components.elements';
 import { Input, Select, FormWrapperStep, FormLabel } from '../Shared';
-import { RegistrationContext } from '../../../routes/Registration/context';
+import { RegistrationContext } from '../context';
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
@@ -23,7 +23,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
         <label htmlFor="dni" />
         <Input type='string' name='dni' maxLength={8} value={dni} placeholder='DNI' onChange={onChange} />
       </Wrapper>
-      <Wrapper
+      {/* <Wrapper
         customCss={css`
           display: flex;
           flex-direction: column;
@@ -33,18 +33,19 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
         <Wrapper>
           <label htmlFor="campania" />
           <Select
+            disabled={true}
             name='campania'
             value={campania}
             onChange={onChange}
           >
             <option>Seleccione una opción</option>
-            <option>Clima, energía y contaminación</option>
-            <option>Océanos, bosques y mares</option>
-            <option>Animales y su medio ambiente</option>
+            <option value='energia-y-contaminacion'>Clima, energía y contaminación</option>
+            <option value='oceanos'>Océanos, bosques y mares</option>
+            <option value='animales'>Animales y su medio ambiente</option>
             <option>Otros fines</option>
           </Select>
         </Wrapper>
-      </Wrapper>
+      </Wrapper> */}
     </FormWrapperStep>
   ), [
     creditCardNumber,
