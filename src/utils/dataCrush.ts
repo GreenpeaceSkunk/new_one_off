@@ -1,6 +1,5 @@
 export const initialize = () => {
   (async () => {
-    console.log('Initialize Data Crush');
     await initializeSynchro();
     await initializeTrackEvent();
   })();
@@ -8,7 +7,6 @@ export const initialize = () => {
 
 export const initializeSynchro = async () => {
   return await (async () => {
-    console.log('Initialize Data Crush Synchro');
     let script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = `//tr.datacrush.la/synchro/synchro.js?${(Math.ceil(new Date().getTime() / 3000)*3000)}`;
@@ -22,9 +20,7 @@ export const synchroInit = async (data = {}) => {
     window.dcS.synchro.init({
       portalID: `${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`,
       synchroKey: `${process.env.REACT_APP_DATA_CRUSH_SYNCHRO_KEY}`,
-    }, data, () => {
-      console.log('Synchronized');
-    });
+    }, data, () => {});
   } else {
     console.log('Data Crush Synchro is unvailable');
   }
@@ -32,7 +28,6 @@ export const synchroInit = async (data = {}) => {
 
 export const initializeTrackEvent = async () => {
   return await (async () => {
-    console.log('Initialize Data Crush Track Event');
     let script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = `//tr.datacrush.la/portal/${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}.js`;
