@@ -11,7 +11,7 @@ import TopicBackground8 from './image33.png';
 import CampaignBosques from './campaigns/bosques.jpg';
 import CampaignClimaYEnergia from './campaigns/clima-y-energia.jpg';
 import CampaignContaminacion from './campaigns/contaminacion.jpg';
-import CampaignOceanos from './campaigns/oceanos.png';
+import CampaignOceanos from './campaigns/oceanos.jpg';
 
 export {
   BackgroundHome,
