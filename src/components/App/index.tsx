@@ -22,7 +22,7 @@ const Component: React.FunctionComponent<{}> = memo(() => {
   useEffect(() => {
     trackEvent('PageView');
     pushToDataLayer('pageview');
-    trackPage();
+    trackPage("", pathname, "");
   }, [ pathname ]);
 
   return useMemo(() => (
