@@ -38,11 +38,15 @@
   },
   "scripts": {
     "client:start": "NODE_ENV=development && node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path='$PWD/.env'",
-    "client:build": "NODE_ENV=production && react-scripts build",
+    "client:build": "NODE_ENV=production && react-scripts build && npm run build:version",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "stylelint": "npx stylelint '**/*.css'",
-    "types": "ln -s $(pwd)/src/types $(pwd)/node_modules/@types/greenpeace"
+    "types": "ln -s $(pwd)/src/types $(pwd)/node_modules/@types/greenpeace",
+    "build:version": "npm run build:version:id && npm run build:version:date && npm run build:author",
+    "build:version:id": "VERSION_BUILD=$(git describe) && sed -i -- 's/%VERSION_BUILD%/'$VERSION_BUILD'/g' ./build/index.html",
+    "build:version:date": "VERSION_BUILD_DATE=$(date +%Y-%m-%d)-$(date +%T) && sed -i -- 's/%VERSION_BUILD_DATE%/'$VERSION_BUILD_DATE'/g' ./build/index.html",
+    "build:author": "BUILD_AUTHOR=$(git config --global user.email) && sed -i -- 's/%BUILD_AUTHOR%/'$BUILD_AUTHOR'/g' ./build/index.html"
   },
   "eslintConfig": {
     "extends": [
