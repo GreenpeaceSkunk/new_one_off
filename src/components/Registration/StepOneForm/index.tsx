@@ -2,7 +2,7 @@ import React, { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { Input, FormWrapperStep, FormLabel, FormGroup, Select } from '../Shared';
 import { RegistrationContext } from '../context';
 import { css } from 'styled-components';
-import { Wrapper } from '@bit/meema.ui-components.elements';
+import { Label, Wrapper } from '@bit/meema.ui-components.elements';
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
@@ -45,7 +45,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 40%;
           `}
         >
-          <label htmlFor="monto" />
+          <Label htmlFor="monto" />
           <Select
             name='monto'
             value={monto}
@@ -65,7 +65,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 55%;
           `}
         >
-          <label htmlFor="otherAmount" />
+          <Label htmlFor="otherAmount" />
           <Input
             disabled={disabledOtherAmount} 
             type='number'
@@ -78,17 +78,17 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       </FormGroup>
 
       <FormGroup>
-        <label htmlFor="email" />
+        <Label htmlFor="email" />
         <Input type='email' name='email' value={email} placeholder='Email' onChange={onChange} />
       </FormGroup>
       
       <FormGroup>
-        <label htmlFor="nombre" />
+        <Label htmlFor="nombre" />
         <Input type='text' name='nombre' value={nombre} placeholder='Nombre' onChange={onChange} />
       </FormGroup>
       
       <FormGroup>
-        <label htmlFor="apellido" />
+        <Label htmlFor="apellido" />
         <Input type='text' name='apellido' value={apellido} placeholder='Apellido' onChange={onChange} />
       </FormGroup>
 
@@ -102,7 +102,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 30%;
           `}
         >
-          <label htmlFor="cod_area" />
+          <Label htmlFor="cod_area" />
           <Input
             type='text'
             name='cod_area'
@@ -116,7 +116,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             width: 65%;
           `}
         >
-          <label htmlFor="telefono" />
+          <Label htmlFor="telefono" />
           <Input
             type='number'
             name='telefono'
