@@ -15,19 +15,13 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
       telefono,
       monto,
     },
+    defaultAmounts,
     onChange,
   } = useContext(RegistrationContext);
   const [ disabledOtherAmount, setDisabledOtherAmount ] = useState<boolean>(true);
 
   useEffect(() => {
-    const isDefaultAmount = (
-      monto === '99'
-      || monto === '399'
-      || monto === '699'
-      || monto === '1999'
-      || monto === '2999'
-    ) as boolean; 
-    setDisabledOtherAmount(isDefaultAmount);
+    setDisabledOtherAmount(defaultAmounts.filter((amount: string) => amount === monto).length ? true : false);
   }, [
     monto,
   ]);
@@ -51,11 +45,9 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             value={monto}
             onChange={onChange}
           >
-            <option value='99'>$99</option>
-            <option value='399'>$399</option>
-            <option value='699'>$699</option>
-            <option value='1999'>$1999</option>
-            <option value='2999'>$2999</option>
+            {(defaultAmounts).map((value: string, key: number) => (
+              <option key={key} value={value}>${value}</option>
+            ))}
             <option value='otherAmount'>Otro importe</option>
           </Select>
         </Wrapper>

@@ -26,7 +26,8 @@ interface IContext {
   currentStep: number;
   submitting?: boolean;
   submitted?: boolean;
-  steps:string[];
+  steps: string[];
+  defaultAmounts: string[];
   goBack: (evt: FormEvent<any>) => void;
   goNext: (evt: FormEvent<any>) => void;
   onChange: (evt: OnChangeEvent) => void;
@@ -51,6 +52,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   const [ currentStep, setCurrentStep ] = useState<number>(1);
   const [ postId, setPostId ] = useState<number>(0);
   const { refParam, queryParams } = useContext(AppContext);
+  const defaultAmounts = ['99', '699', '1999', '2999'];
 
   const onChange = useCallback((evt: OnChangeEvent) => {
     evt.preventDefault();
@@ -220,9 +222,14 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   useEffect(() => {
+    const amountParam = queryParams.get('default');
+    const isCustom = (amountParam && !defaultAmounts.filter((amount: string) => amount === amountParam).length) ? true : false; 
     dispatch({
       type: 'UPDATE_USER_DATA',
-      payload: { monto: (queryParams.get('default')) ? `${queryParams.get('default')}` : '699' }
+      payload: { 
+        monto: (isCustom) ? 'otherAmount' : `${amountParam}`,
+        otherAmount: `${amountParam}`,
+      },
     });
   }, []);
 
@@ -234,6 +241,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       submitted,
       submitting,
       steps,
+      defaultAmounts,
       goBack,
       goNext,
       onChange,
