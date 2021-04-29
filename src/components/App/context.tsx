@@ -23,13 +23,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   
   useEffect(() => {
     if(queryParams) {
-      if(queryParams.get('campaign')) {
-        setCampaignParam(`${queryParams.get('campaign')}`);
-      }
+      // if(queryParams.get('campaign')) {
+      //   setCampaignParam(`${queryParams.get('campaign')}`);
+      // }
       
-      if(queryParams.get('amount')) {
-        setDefaultAmountParam(`${queryParams.get('amount')}`);
-      }
+      // if(queryParams.get('amount')) {
+      //   setDefaultAmountParam(`${queryParams.get('amount')}`);
+      // }
 
       if(queryParams.get('ref')) {
         setRefParam(queryParams.get('ref') || `${process.env.REACT_APP_DEFAULT_REF_PARAM}`);
@@ -49,7 +49,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ), [
     refParam,
     queryParams,
-    defaultAmountParam,
+    // defaultAmountParam,
     campaignParam,
     children,
   ]);

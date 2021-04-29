@@ -39,7 +39,7 @@ export const initialState: ContextStateType = {
 
 export const reducer: GenericReducerFn<ContextStateType, ContextActionType> = (state: ContextStateType, action: ContextActionType) => {
   switch (action.type) {
-    case 'UPDATE_USER_DATA': 
+    case 'UPDATE_USER_DATA':
       return {
         ...state,
         data: {
@@ -47,6 +47,9 @@ export const reducer: GenericReducerFn<ContextStateType, ContextActionType> = (s
           ...action.payload,
           ...(action.payload['monto']) && {
             otherAmount: '',
+          },
+          ...(action.payload['monto'] && action.payload['otherAmount']) && {
+            otherAmount: action.payload['otherAmount'],
           },
         } as IUserData,
       }
