@@ -10,35 +10,63 @@ import { AppContext } from '../App/context';
 import config from '../../config';
 
 const showBackground = (campaign = '') => css`
-  transition: all 250ms ease;
-
+  /* background-size: auto 100%; */
+  --background-image: ${(campaign === 'bosques')
+    ? `url(${CampaignBosques})` 
+    : (campaign === 'oceanos') 
+    ? `url(${CampaignOceanos})`
+    : (campaign === 'contaminacion') 
+    ? `url(${CampaignContaminacion})`
+    : (campaign === 'clima-y-energia')
+    ? `url(${CampaignClimaYEnergia})`
+    : `url(${BackgroundHome})`
+  };
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-image: 
-    ${(campaign === 'bosques')
-      ? `url(${CampaignBosques})` 
-      : (campaign === 'oceanos') 
-        ? `url(${CampaignOceanos})`
-          : (campaign === 'contaminacion') 
-          ? `url(${CampaignContaminacion})`
-            : (campaign === 'clima-y-energia')
-              ? `url(${CampaignClimaYEnergia})`
-              : `url(${BackgroundHome})`
-    };
+    linear-gradient(0deg, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, 0) 100%), var(--background-image);
+    /* animation-name: animate-background; */
+    animation-duration: 1s;
+    animation-delay: 500ms;
+    animation-iteration-count: infinite;
+    transition: all 250ms ease;
+  
+    @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .75) 100%), var(--background-image);
+    }
+
+    @keyframes animate-background {
+      0% {
+        /* background-size: auto 100%; */
+        transform: scale(1);
+      }
+      50% {
+        /* background-size: auto 110%; */
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        /* background-size: auto 100%; */
+      }
+    }
 `; 
 
 const SideWrapper = styled(Wrapper)<{ campaign: string }>`
-  flex: 1 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
   padding: ${pixelToRem(44)} ${pixelToRem(106)};
   color: white;
-  height: 100%;
+    overflow: hidden;
 
   &:first-child {
-    padding-left: ${pixelToRem(60)};
-    padding-right: ${pixelToRem(60)};
-
-    ${({campaign}) => (campaign) && showBackground(campaign) }
+    align-items: flex-end;
+    padding-left: ${pixelToRem(40)};
+    padding-right: ${pixelToRem(40)};
+    min-height: ${pixelToRem(400)};
+    ${({campaign}) => showBackground(campaign)};
   }
   
   &:last-child {
@@ -48,6 +76,8 @@ const SideWrapper = styled(Wrapper)<{ campaign: string }>`
   @media (min-width: ${props => pixelToRem(props.theme.responsive.tablet.minWidth)}) {
     &:first-child {
       background-image: none;
+      padding-left: ${pixelToRem(60)};
+      padding-right: ${pixelToRem(60)};
     }
 
     &:last-child {
@@ -68,44 +98,59 @@ const Home: React.FunctionComponent<{}> = () => {
           display: flex;
           flex-direction: column;
 
-          ${showBackground(queryParams.get('campaign') || '')};
-
           @media (min-width: ${props => pixelToRem(props.theme.responsive.tablet.minWidth)}) {
             flex-direction: row;
-            padding: 3rem 0;
+            padding: ${pixelToRem(48)} 0;
+            ${showBackground(queryParams.get('campaign') || '')};
           }
         `}
       >
-        <SideWrapper
-          campaign={queryParams.get('campaign') || ''}>
+        <SideWrapper campaign={queryParams.get('campaign') || ''}>
           <Wrapper
             customCss={css`
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
               width: 100%;
+              height: 100%;
+
+              @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                justify-content: flex-start;
+              }
             `}
           >
             <H1
               customCss={css`
-                font-family: ${props => props.theme.font.family.primary.light};
-                letter-spacing: 12%;
-                margin-bottom: ${pixelToRem(26)};
+                margin-bottom: ${pixelToRem(16)};
+                font-size: ${pixelToRem(20)};
+                font-family: ${props => props.theme.font.family.primary.bold};
+                line-height: 140%;
                 color: white;
+                text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
 
+                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                  margin-bottom: ${pixelToRem(26)};
+                  font-size: ${pixelToRem(30)};
+                }
               `}
             >
               {
                 (queryParams && config.campaigns[`${queryParams.get('campaign')}`])
                 ? config.campaigns[`${queryParams.get('campaign')}`].title
-                : 'GREENPEACE SOS VOS'
+                : 'Greenpeace sos vos'
               }
             </H1>
             <P
               customCss={css`
-                font-size: ${pixelToRem(22)};
+                 font-size: ${pixelToRem(20)};
                 font-family: ${(props) => props.theme.font.family.primary.normal};
                 line-height: 140%;
                 color: white;
-                text-shadow: 0 0 ${pixelToRem(0)} rgba(0, 0, 0, .5);
+                text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
 
+                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                  font-size: ${pixelToRem(22)};
+                }
               `}
             >
               {

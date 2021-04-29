@@ -14,12 +14,12 @@ export const initialize = () => {
   })
 }
 
-export const trackPage = () => {
+export const trackPage = (url = '', pathname = '', search = '') => {
   if(analytics) {
     analytics.page({
-      url: window.location.href,
-      path: window.location.pathname,
-      search: window.location.search,
+      url: (url !== '') ? url : window.location.href,
+      path: (pathname !== '') ? pathname : window.location.pathname,
+      search: (search !== '') ? search : window.location.search,
     });
   }
 }

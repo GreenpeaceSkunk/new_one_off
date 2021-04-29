@@ -1,7 +1,6 @@
 import React, { memo, useContext, useMemo } from 'react';
-import { css } from 'styled-components';
 import { Wrapper } from '@bit/meema.ui-components.elements';
-import { Input, Select, FormWrapperStep, FormLabel } from '../Shared';
+import { Input, FormWrapperStep, FormLabel } from '../Shared';
 import { RegistrationContext } from '../context';
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
@@ -9,7 +8,6 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     data: {
       creditCardNumber,
       dni,
-      campania,
     },
     onChange,
   } = useContext(RegistrationContext);
@@ -50,7 +48,6 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
   ), [
     creditCardNumber,
     dni,
-    campania,
     onChange,
   ]);
 }

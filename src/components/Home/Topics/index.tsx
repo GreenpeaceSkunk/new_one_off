@@ -20,17 +20,17 @@ const Topics: FunctionComponent<{}> = () => (
       customCss={css`
         width: 100%;
         text-align: center;
-        font-family: ${props => props.theme.font.family.primary.light};
+        font-family: ${({theme}) => theme.font.family.primary.light};
         text-transform: uppercase;
         font-size: ${pixelToRem(20)};
-        padding: 2rem 1rem;
-        background: ${props => props.theme.color.primary.dark};
-        color: ${props => props.theme.color.primary.normal};
+        padding: ${pixelToRem(32)} ${pixelToRem(16)};
+        background: ${({theme}) => theme.color.primary.dark};
+        color: ${({theme}) => theme.color.primary.normal};
         transition: all 250ms ease;
 
         @media (min-width: ${props => pixelToRem(props.theme.responsive.tablet.minWidth)}) {
           color: ${props => props.theme.color.primary.dark};
-          padding-top: 3rem;
+          margin-top-top: ${pixelToRem(48)};
           font-size: ${pixelToRem(28)};
           background: transparent;
         }
@@ -46,6 +46,7 @@ const Topics: FunctionComponent<{}> = () => (
         padding: ${pixelToRem(30)} ${pixelToRem(30)} ${pixelToRem(80)} ${pixelToRem(30)};
 
         @media (min-width: ${props => pixelToRem(props.theme.responsive.desktop.minWidth)}) {
+          align-items: flex-start;
           flex-wrap: nowrap;
         }
       `}>

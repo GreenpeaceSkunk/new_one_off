@@ -27,7 +27,7 @@ const Component: React.FunctionComponent<{}> = () => {
         display: flex;
         flex-direction: column;
         width: 100%;
-        background: white;
+        background: rgba(255, 255, 255, 0.8);
         transition: all 0.5s ease;
         color: ${(props) => props.theme.text.color.primary.normal};
 
@@ -51,7 +51,6 @@ const Component: React.FunctionComponent<{}> = () => {
           showAlwaysTick={true} 
         />
       </Wrapper>
-      
       <Wrapper
         customCss={css`
           height: 100%;

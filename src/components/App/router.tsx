@@ -1,6 +1,6 @@
 import React, { Suspense, memo, useMemo, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import styled, { css }  from 'styled-components';
+import { css }  from 'styled-components';
 import { Wrapper } from '@bit/meema.ui-components.elements';
 import { Loader } from '../Shared';
 import MainFooter, {TinyFooter} from '../Footer';
