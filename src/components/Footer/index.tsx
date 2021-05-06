@@ -70,7 +70,7 @@ const BottomContent = () => (
       `}
     >
       <A
-        href='https://www.greenpeace.org/argentina/politica-privacidad/'
+        href={`${process.env.REACT_APP_PRIVACY_POLICY_URL}`}
         customCss={css`
           color: white;
           text-decoration: underline;

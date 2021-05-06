@@ -3,7 +3,7 @@ export const validateField = (value = ''): boolean => {
 };
 
 export const validateAmount = (monto = '', otherAmount = ''): boolean => {
-  return !(monto === 'otherAmount' && otherAmount === '');
+  return !(monto === '' || (monto === 'otherAmount' && otherAmount === '')) ;
 }
 
 export const validateFirstName = (value = ''): boolean => {

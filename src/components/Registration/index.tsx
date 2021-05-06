@@ -68,7 +68,6 @@ const Component: React.FunctionComponent<{}> = () => {
           {(error) && <Errors>{error}</Errors>}
         </Form>
       </Wrapper>
-      
       <Wrapper>
         <SubmitNav>
           <Switch>

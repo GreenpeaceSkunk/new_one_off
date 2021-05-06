@@ -24,6 +24,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     setDisabledOtherAmount(defaultAmounts.filter((amount: string) => amount === monto).length ? true : false);
   }, [
     monto,
+    defaultAmounts,
   ]);
 
   return useMemo(() => (
@@ -51,7 +52,6 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
             <option value='otherAmount'>Otro importe</option>
           </Select>
         </Wrapper>
-
         <Wrapper
           customCss={css`
             width: 55%;
@@ -128,6 +128,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     telefono,
     monto,
     disabledOtherAmount,
+    defaultAmounts,
     onChange,
   ]);
 }
