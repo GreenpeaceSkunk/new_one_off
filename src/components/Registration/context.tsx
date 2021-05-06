@@ -40,6 +40,7 @@ interface IProps {
 }
 
 const steps:string[] = ['Paso 1', 'Paso 2'];
+const defaultAmounts = ['99', '699', '1999', '2999'];
 
 const Context = createContext({} as IContext);
 Context.displayName = 'RegistrationContext';
@@ -52,7 +53,6 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   const [ currentStep, setCurrentStep ] = useState<number>(1);
   const [ postId, setPostId ] = useState<number>(0);
   const { refParam, queryParams } = useContext(AppContext);
-  const defaultAmounts = ['99', '699', '1999', '2999'];
 
   const onChange = useCallback((evt: OnChangeEvent) => {
     evt.preventDefault();
@@ -227,11 +227,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     dispatch({
       type: 'UPDATE_USER_DATA',
       payload: { 
-        monto: (isCustom) ? 'otherAmount' : `${amountParam}`,
+        monto: (isCustom) ? 'otherAmount' : `${amountParam || '99'}`,
         otherAmount: `${amountParam}`,
       },
     });
-  }, []);
+  }, [
+    queryParams,
+  ]);
 
   return useMemo(() => (
     <Provider value={{
