@@ -12,6 +12,7 @@ import CampaignBosques from './campaigns/bosques.jpg';
 import CampaignClimaYEnergia from './campaigns/clima-y-energia.jpg';
 import CampaignContaminacion from './campaigns/contaminacion.jpg';
 import CampaignOceanos from './campaigns/oceanos.jpg';
+import CampaignDeltaDelParana from './campaigns/delta-del-parana.jpg';
 
 export {
   BackgroundHome,
@@ -28,4 +29,5 @@ export {
   CampaignClimaYEnergia,
   CampaignContaminacion,
   CampaignOceanos,
+  CampaignDeltaDelParana,
 }

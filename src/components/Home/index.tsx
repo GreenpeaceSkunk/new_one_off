@@ -5,21 +5,30 @@ import { pixelToRem } from 'greenpeace-ui-themes';
 import styled, { css } from 'styled-components';
 import RegistrationForm from '../Registration';
 import Topics from './Topics';
-import { BackgroundHome, CampaignBosques, CampaignClimaYEnergia, CampaignOceanos, CampaignContaminacion } from '../../assets/images';
+import {
+  BackgroundHome,
+  CampaignBosques,
+  CampaignClimaYEnergia,
+  CampaignOceanos,
+  CampaignContaminacion,
+  CampaignDeltaDelParana,
+} from '../../assets/images';
 import { AppContext } from '../App/context';
 import config from '../../config';
 
 const showBackground = (campaign = '') => css`
-  /* background-size: auto 100%; */
-  --background-image: ${(campaign === 'bosques')
-    ? `url(${CampaignBosques})` 
-    : (campaign === 'oceanos') 
-    ? `url(${CampaignOceanos})`
-    : (campaign === 'contaminacion') 
-    ? `url(${CampaignContaminacion})`
-    : (campaign === 'clima-y-energia')
-    ? `url(${CampaignClimaYEnergia})`
-    : `url(${BackgroundHome})`
+  --background-image: 
+    ${(campaign === 'bosques')
+      ? `url(${CampaignBosques})` 
+      : (campaign === 'oceanos') 
+        ? `url(${CampaignOceanos})`
+        : (campaign === 'contaminacion') 
+          ? `url(${CampaignContaminacion})`
+          : (campaign === 'clima-y-energia')
+            ? `url(${CampaignClimaYEnergia})`
+            : (campaign === 'delta-del-parana')
+              ? `url(${CampaignDeltaDelParana})`
+              : `url(${BackgroundHome})`
   };
   background-size: cover;
   background-repeat: no-repeat;
