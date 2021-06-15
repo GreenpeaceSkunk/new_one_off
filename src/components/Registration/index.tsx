@@ -2,7 +2,7 @@ import React, { memo, useContext, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { css } from 'styled-components';
 import { pixelToRem, colorPrimaryDark } from 'greenpeace-ui-themes';
-import { Wrapper } from '@bit/meema.ui-components.elements';
+import { Wrapper, H1 } from '@bit/meema.ui-components.elements';
 import Carousel from '@bit/meema.ui-components.carousel';
 import Stepper from '@bit/meema.ui-components.stepper';
 import { SubmitNav, Errors, Form, FormButton } from '../../components/Registration/Shared';
@@ -42,6 +42,12 @@ const Component: React.FunctionComponent<{}> = () => {
           padding: ${pixelToRem(32)} ${pixelToRem(40)} ${pixelToRem(20)} ${pixelToRem(40)};
         `}
       >
+        <H1
+          customCss={css`
+            font-size: ${pixelToRem(20)};
+            margin-bottom: ${pixelToRem(30)};
+          `}
+        >Quiero hacer la donación por única vez</H1>
         <Stepper
           steps={steps}
           currentStep={currentStep}

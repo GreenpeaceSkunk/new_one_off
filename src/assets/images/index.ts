@@ -1,4 +1,4 @@
-import BackgroundHome from './background.png';
+import BackgroundHome from './default.png';
 import bg_thank_you_page from './bg-thank-you-page.png';
 import TopicBackground1 from './5de68d2159bf5b13b67193071.png';
 import TopicBackground2 from './GP0STUJ49_Web_size.png';

@@ -52,7 +52,7 @@ export const Select = styled.select<{width?: string, marginRight?: string}>`
     border-color: ${(props) => props.theme.color.primary.normal};;
   }
 `;
-// 'outlined' | 'contained' | 'text';
+
 export const FormButton = styled(Button)`
   border-radius: ${pixelToRem(borderRadius)};
   padding: ${pixelToRem(6)} ${pixelToRem(27)};
