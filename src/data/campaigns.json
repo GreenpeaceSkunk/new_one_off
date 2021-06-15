@@ -1,0 +1,53 @@
+{
+  "data": {
+    "default": {
+      "name": "Default",
+      "title": "Greenpeace sos vos",
+      "subtitle": "",
+      "description": "Gracias al aporte de personas como vos pudimos seguir cuidando nuestro planeta durante todo el 2020. Es hora de mirar hacia el futuro y de planear un nuevo año lleno de acciones verdes.",
+      "image": "default.png"
+    },
+    "bosques": {
+      "name": "Bosques",
+      "title": "Greenpeace sos vos",
+      "subtitle": "",
+      "description": "Sumate antes de que el daño por desmontes e incendios generen una destrucción irreversible en los bosques",
+      "image": "bosques.jpg"
+    },
+    "clima-y-energia": {
+      "name": "Clima y energía",
+      "title": "Greenpeace sos vos",
+      "subtitle": "",
+      "description": "Sumate y en conjunto evitemos que la temperatura de nuestro planeta siga aumentando: hay alternativas",
+      "image": "clima-y-energia.jpg"
+    },
+    "contaminacion": {
+      "name": "Contaminación",
+      "title": "Greenpeace sos vos",
+      "subtitle": "",
+      "description": "Sumate antes de que sea muy tarde para salvar a nuestro planeta de los daños causados por acciones humanas",
+      "image": "contaminacion.jpg"
+    },
+    "oceanos": {
+      "name": "Océanos",
+      "title": "Greenpeace sos vos",
+      "subtitle": "",
+      "description": "Sumate para cuidar el agua, evitar que se extingan más especies, y devolver la paz a los océanos",
+      "image": "oceanos.jpg"
+    },
+    "delta-del-parana": {
+      "name": "Delta del Paraná",
+      "title": "Delta del Paraná",
+      "subtitle": "El mayor pico de incendios de los últimos 9 años",
+      "description": "Además de generar daños graves en el ecosistema y en la flora y fauna autóctona, los incendios impactan directamente en la salud, sobre todo de las comunidades aledañas: los valores de contaminación en el aire superan más de 5 a 6 veces lo admitido por ley. Sumate como socio/a y ayudanos a seguir trabajando para lograr que se penalicen las quemas y se introduzca nuevamente la figura de delito penal en el proyecto de Ley de Humedales.",
+      "image": "delta.jpg"
+    },
+    "landing-sustentabilidad": {
+      "name": "Sustentabilidad",
+      "title": "",
+      "subtitle": "",
+      "description": "<p>Te invitamos a realizar una donación por única vez completando los datos en este formulario.</p><p>Con tu apoyo podemos investigar y trabajar en el medio ambiente y cambiar la calidad de vida de todos. Greenpeace lleva más de 30 campañas ganadas, gracias al aporte de gente como vos, que piensa en el cuidado del planeta.</p><p>Quiero hacer una donación por única vez.</p>",
+      "image": "delta.png"
+    }
+  }
+}

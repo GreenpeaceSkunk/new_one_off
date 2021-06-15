@@ -67,3 +67,5 @@ interface IUserData {
   telefono?: string;
   monto?: string;
 }
+
+export type CampaignType = 'default' | 'bosques' | 'clima-y-energia' | 'contaminacion' | 'oceanos' | 'delta-del-parana' | 'landing-sustentabilidad';
