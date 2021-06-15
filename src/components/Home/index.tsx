@@ -14,7 +14,42 @@ import {
   CampaignDeltaDelParana,
 } from '../../assets/images';
 import { AppContext } from '../App/context';
-import config from '../../config';
+import { data } from '../../data/campaigns.json';
+// import config from '../../config';
+import { CampaignType } from 'greenpeace';
+
+const HGroup = styled.hgroup`
+  margin-bottom: ${pixelToRem(16)};
+  font-family: ${props => props.theme.font.family.primary.bold};
+  text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
+
+  * {
+    color: white;
+    line-height: 120%;
+  }
+
+  h1 {
+    font-size: ${pixelToRem(28)};
+    margin-bottom: ${pixelToRem(10)};
+
+    @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+      font-size: ${pixelToRem(30)};
+    }
+  }
+  
+  h2 {
+    font-size: ${pixelToRem(22)};
+    
+    @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+      font-size: ${pixelToRem(26)};
+    }
+  }
+
+  
+  @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+    margin-bottom: ${pixelToRem(26)};
+  }
+`;
 
 const showBackground = (campaign = '') => css`
   --background-image: 
