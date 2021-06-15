@@ -1,6 +1,6 @@
-import React, { memo, useContext, useMemo } from 'react';
+import React, { memo, useContext, useMemo, useEffect, useState, } from 'react';
 import { Redirect, Route, Switch, useRouteMatch, withRouter } from 'react-router';
-import { Wrapper, H1, P, View } from '@bit/meema.ui-components.elements';
+import { Wrapper, H1, H2, P, View } from '@bit/meema.ui-components.elements';
 import { pixelToRem } from 'greenpeace-ui-themes';
 import styled, { css } from 'styled-components';
 import RegistrationForm from '../Registration';
@@ -29,13 +29,11 @@ const showBackground = (campaign = '') => css`
             : (campaign === 'delta-del-parana')
               ? `url(${CampaignDeltaDelParana})`
               : `url(${BackgroundHome})`
-  };
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: 
-    linear-gradient(0deg, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, 0) 100%), var(--background-image);
-    /* animation-name: animate-background; */
+    };
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, 0) 100%), var(--background-image);
     animation-duration: 1s;
     animation-delay: 500ms;
     animation-iteration-count: infinite;
@@ -68,7 +66,7 @@ const SideWrapper = styled(Wrapper)<{ campaign: string }>`
   flex-basis: 100%;
   padding: ${pixelToRem(44)} ${pixelToRem(106)};
   color: white;
-    overflow: hidden;
+  overflow: hidden;
 
   &:first-child {
     align-items: flex-end;
@@ -99,6 +97,17 @@ const SideWrapper = styled(Wrapper)<{ campaign: string }>`
 const Home: React.FunctionComponent<{}> = () => {
   const { queryParams } = useContext(AppContext);
   const { path } = useRouteMatch();
+  const [ campaign, setCampaign ] = useState<CampaignType>();
+
+  useEffect(() => {
+    if(queryParams.get('campaign')) {
+      setCampaign(queryParams.get('campaign') as CampaignType);
+    } else {
+      setCampaign('default');
+    }
+  }, [
+    queryParams.get('campaign'),
+  ])
   
   return useMemo(() => (
     <View>
@@ -128,46 +137,43 @@ const Home: React.FunctionComponent<{}> = () => {
               }
             `}
           >
-            <H1
-              customCss={css`
-                margin-bottom: ${pixelToRem(16)};
-                font-size: ${pixelToRem(20)};
-                font-family: ${props => props.theme.font.family.primary.bold};
-                line-height: 140%;
-                color: white;
-                text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
+            {
+              (campaign) ? (
+                <>
+                  {(data[campaign].title || data[campaign].subtitle) ? (
+                    <HGroup>
+                      {data[campaign].title ? (
+                        <H1>{data[campaign].title}</H1>
+                      ) : null}
 
-                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-                  margin-bottom: ${pixelToRem(26)};
-                  font-size: ${pixelToRem(30)};
-                }
-              `}
-            >
-              {
-                (queryParams && config.campaigns[`${queryParams.get('campaign')}`])
-                ? config.campaigns[`${queryParams.get('campaign')}`].title
-                : 'Greenpeace sos vos'
-              }
-            </H1>
-            <P
-              customCss={css`
-                 font-size: ${pixelToRem(20)};
-                font-family: ${(props) => props.theme.font.family.primary.normal};
-                line-height: 140%;
-                color: white;
-                text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
+                      {data[campaign].subtitle ? (
+                        <H2>{data[campaign].subtitle}</H2>
+                      ) : null}
+                    </HGroup>
+                  ) : null}
+                  
+                  <P
+                    customCss={css`
+                      font-size: ${pixelToRem(20)};
+                      font-family: ${(props) => props.theme.font.family.primary.normal};
+                      line-height: 140%;
+                      color: white;
+                      text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
 
-                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-                  font-size: ${pixelToRem(22)};
-                }
-              `}
-            >
-              {
-                (queryParams && config.campaigns[`${queryParams.get('campaign')}`])
-                ? config.campaigns[`${queryParams.get('campaign')}`].description
-                : 'Gracias al aporte de personas como vos pudimos seguir cuidando nuestro planeta durante todo el 2020. Es hora de mirar hacia el futuro y de planear un nuevo año lleno de acciones verdes.'
-              }
-              </P>
+                      @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                        font-size: ${pixelToRem(22)};
+                      }
+
+                      p {
+                        margin-bottom: ${pixelToRem(20)};
+                      }
+                    `}
+                    dangerouslySetInnerHTML={{__html: data[campaign].description}}
+                  />
+                </>
+              ) : null
+            }
+            
           </Wrapper>
         </SideWrapper>
         <SideWrapper campaign={queryParams.get('campaign') || ''}>
@@ -187,6 +193,7 @@ const Home: React.FunctionComponent<{}> = () => {
   ), [
     path,
     queryParams,
+    campaign,
   ]);
 };
 
