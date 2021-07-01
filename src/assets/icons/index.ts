@@ -6,6 +6,8 @@ import WhatsappLogo from './whatsapp.svg';
 import EmailLogo from './email.svg';
 import PeopleIcon from './people.svg';
 import SelectArrowIcon from './select-arrow.svg';
+import TickIcon from './tick.svg';
+import LockIcon from './lock.svg';
 
 export {
   GreenpeaceLogoWhite,
@@ -16,4 +18,6 @@ export {
   EmailLogo,
   PeopleIcon,
   SelectArrowIcon,
+  TickIcon,
+  LockIcon,
 }

@@ -1,5 +1,5 @@
 import React, { createContext, FormEvent, useCallback, useEffect, useMemo, useReducer, useState, MouseEvent, ChangeEvent, useContext } from 'react';
-import { IUserData } from 'greenpeace';
+import { IData, IUserData } from 'greenpeace';
 import { useParams, withRouter, RouteComponentProps, useHistory } from 'react-router';
 import { ContextActionType, initialState, reducer } from './reducer';
 import { submitDataWithSteps, IResponse } from './service';
@@ -17,11 +17,10 @@ import {
 import { AppContext } from '../App/context';
 import { synchroInit } from '../../utils/dataCrush';
 
-
 type OnChangeEvent = MouseEvent<HTMLButtonElement> | ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>;
 
 interface IContext {
-  data: IUserData;
+  data: IData;
   error: string | null;
   currentStep: number;
   submitting?: boolean;
@@ -56,16 +55,40 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
 
   const onChange = useCallback((evt: OnChangeEvent) => {
     evt.preventDefault();
-    dispatch({
-      type: 'UPDATE_USER_DATA',
-      payload: { [evt.currentTarget.name]: evt.currentTarget.value }
-    });
+
+    const fieldName = evt.currentTarget.name;
+    if(fieldName === 'otherAmount' || fieldName === 'monto' || fieldName === 'amount' || fieldName === 'creditCardNumber') {
+      dispatch({
+        type: 'UPDATE_PAYMENT_DATA',
+        payload: { [evt.currentTarget.name]: evt.currentTarget.value }
+      });
+    } else {
+      dispatch({
+        type: 'UPDATE_USER_DATA',
+        payload: { [evt.currentTarget.name]: evt.currentTarget.value }
+      });
+    }
+
   }, [
     dispatch,
   ]);
 
   const validate = useCallback((stepId: number): boolean => {
-    const { monto, otherAmount, email, nombre, apellido, cod_area, telefono, creditCardNumber, dni } = data;
+    const {
+      user: {
+        email,
+        nombre,
+        apellido,
+        cod_area,
+        telefono,
+        dni,
+      },
+      donation: {
+        monto,
+        otherAmount,
+        creditCardNumber,
+      }
+    } = data;
     if(!data) {
       dispatch({type: 'SET_ERROR', error: 'Se deberán completar los campos.'});
     } else {
@@ -113,29 +136,41 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     evt.preventDefault();
     const isValid = validate(currentStep);
     if(isValid) {
+      
       dispatch({ type: 'SUBMIT'});
       const {
-        apellido,
-        cod_area,
-        creditCardNumber,
-        dni,
-        email,
-        monto,
-        nombre,
-        otherAmount,
-        telefono,
-        campania,
+        user: {
+          apellido,
+          cod_area,
+          dni,
+          email,
+          nombre,
+          telefono,
+        },
+        donation: {
+          creditCardNumber,
+          monto,
+          otherAmount,
+        },
       } = data;
+      const newAmount = parseAmount(monto, otherAmount);
       let submitted = false;
       
-      switch(currentStep) { 
+      switch(currentStep) {
         case 1:
           const resStep1: IResponse = await submitDataWithSteps(
             {
-              apellido,
-              email,
-              monto: parseAmount(monto, otherAmount),
-              nombre,
+              user: {
+                apellido,
+                cod_area,
+                dni,
+                email,
+                nombre,
+                telefono,
+              },
+              donation: {
+                monto: newAmount,
+              }
             },
             postId,
             refParam,
@@ -147,18 +182,20 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           }
           break;
         case 2:
-          const newAmount = parseAmount(monto, otherAmount);
           const resStep2: IResponse = await submitDataWithSteps(
             {
-              apellido,
-              cod_area,
-              creditCardNumber,
-              dni,
-              email,
-              monto: newAmount,
-              nombre,
-              telefono,
-              campania,
+              user: {
+                apellido,
+                cod_area,
+                dni,
+                email,
+                nombre,
+                telefono,
+              },
+              donation: {
+                creditCardNumber,
+                monto: newAmount,
+              } 
             },
             postId,
             refParam
@@ -216,7 +253,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   useEffect(() => {
-    setCurrentStep(Number(stepId));
+    setCurrentStep(parseInt(stepId));
   }, [
     stepId,
   ]);
@@ -225,14 +262,13 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     const amountParam = queryParams.get('default');
     const isCustom = (amountParam && !defaultAmounts.filter((amount: string) => amount === amountParam).length) ? true : false; 
     dispatch({
-      type: 'UPDATE_USER_DATA',
+      type: 'UPDATE_PAYMENT_DATA',
       payload: { 
         monto: (isCustom) ? 'otherAmount' : `${amountParam || '699'}`,
-        otherAmount: `${amountParam}`,
+        // otherAmount: `${amountParam}`,
       },
     });
   }, [
-    queryParams,
   ]);
 
   return useMemo(() => (

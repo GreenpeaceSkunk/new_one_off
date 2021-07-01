@@ -4,7 +4,8 @@ import { Wrapper, A, H1, Span, View } from '@bit/meema.ui-components.elements'
 import { css } from 'styled-components';
 import { backgroundImage } from '../../styles/mixins';
 import { bg_thank_you_page } from '../../assets/images';
-import { pixelToRem, headerHeightNormal } from 'greenpeace-ui-themes';
+import { headerHeightNormal } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import { trackEvent as trackFacebookPixelEvent } from '../../utils/facebookPixel';
 import { trackEvent as trackDataCrushEvent } from '../../utils/dataCrush';
 

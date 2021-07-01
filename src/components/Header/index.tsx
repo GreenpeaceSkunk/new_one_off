@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Wrapper, Header } from '@bit/meema.ui-components.elements';
-import { headerHeightNormal, pixelToRem } from 'greenpeace-ui-themes';
+import { headerHeightNormal } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import { css } from 'styled-components';
 
 import { Logo } from '../../components/Shared';

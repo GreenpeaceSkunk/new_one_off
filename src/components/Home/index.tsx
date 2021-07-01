@@ -1,9 +1,10 @@
 import React, { memo, useContext, useMemo, useEffect, useState, } from 'react';
 import { Redirect, Route, Switch, useRouteMatch, withRouter } from 'react-router';
 import { Wrapper, H1, H2, P, View } from '@bit/meema.ui-components.elements';
-import { pixelToRem } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import styled, { css } from 'styled-components';
 import RegistrationForm from '../Registration';
+// import RegistrationForm from '../Forms';
 import Topics from './Topics';
 import {
   BackgroundHome,
@@ -12,39 +13,23 @@ import {
   CampaignOceanos,
   CampaignContaminacion,
   CampaignDeltaDelParana,
+  CampaignSustentabilidad,
 } from '../../assets/images';
 import { AppContext } from '../App/context';
-import { data } from '../../data/campaigns.json';
-// import config from '../../config';
-import { CampaignType } from 'greenpeace';
 
 const HGroup = styled.hgroup`
   margin-bottom: ${pixelToRem(16)};
-  font-family: ${props => props.theme.font.family.primary.bold};
   text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
 
   * {
     color: white;
     line-height: 120%;
-  }
-
-  h1 {
-    font-size: ${pixelToRem(28)};
     margin-bottom: ${pixelToRem(10)};
 
-    @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-      font-size: ${pixelToRem(30)};
+    &:last-child {
+      margin-bottom: 0;
     }
   }
-  
-  h2 {
-    font-size: ${pixelToRem(22)};
-    
-    @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-      font-size: ${pixelToRem(26)};
-    }
-  }
-
   
   @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
     margin-bottom: ${pixelToRem(26)};
@@ -63,7 +48,9 @@ const showBackground = (campaign = '') => css`
             ? `url(${CampaignClimaYEnergia})`
             : (campaign === 'delta-del-parana')
               ? `url(${CampaignDeltaDelParana})`
-              : `url(${BackgroundHome})`
+                : (campaign === 'landing-sustentabilidad')
+                ? `url(${CampaignSustentabilidad})`
+                  : `url(${BackgroundHome})`
     };
     background-size: cover;
     background-repeat: no-repeat;
@@ -130,19 +117,8 @@ const SideWrapper = styled(Wrapper)<{ campaign: string }>`
 `;
 
 const Home: React.FunctionComponent<{}> = () => {
-  const { queryParams } = useContext(AppContext);
+  const { queryParams, campaign } = useContext(AppContext);
   const { path } = useRouteMatch();
-  const [ campaign, setCampaign ] = useState<CampaignType>();
-
-  useEffect(() => {
-    if(queryParams.get('campaign')) {
-      setCampaign(queryParams.get('campaign') as CampaignType);
-    } else {
-      setCampaign('default');
-    }
-  }, [
-    queryParams.get('campaign'),
-  ])
   
   return useMemo(() => (
     <View>
@@ -154,74 +130,96 @@ const Home: React.FunctionComponent<{}> = () => {
           @media (min-width: ${props => pixelToRem(props.theme.responsive.tablet.minWidth)}) {
             flex-direction: row;
             padding: ${pixelToRem(48)} 0;
-            ${showBackground(queryParams.get('campaign') || '')};
+            ${showBackground(campaign?.slug)};
           }
         `}
       >
-        <SideWrapper campaign={queryParams.get('campaign') || ''}>
-          <Wrapper
-            customCss={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-end;
-              width: 100%;
-              height: 100%;
+        {
+          (campaign) ? (
+            <>
+            <SideWrapper campaign={campaign.slug}>
+              <Wrapper
+                customCss={css`
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  width: 100%;
+                  height: 100%;
 
-              @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-                justify-content: flex-start;
-              }
-            `}
-          >
-            {
-              (campaign) ? (
-                <>
-                  {(data[campaign].title || data[campaign].subtitle) ? (
-                    <HGroup>
-                      {data[campaign].title ? (
-                        <H1>{data[campaign].title}</H1>
+                  @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                    justify-content: flex-start;
+                  }
+                `}
+              >
+                {
+                  (campaign) ? (
+                    <>
+                      {(campaign.title || campaign.subtitle) ? (
+                        <HGroup>
+                          {campaign.title ? (
+                            <H1
+                              customCss={css`
+                                font-family: ${props => props.theme.font.family.primary.bold};
+                                font-size: ${pixelToRem(28)};
+
+                                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                                  font-size: ${pixelToRem(34)};
+                                }
+                              `}
+                            >{campaign.title}</H1>
+                          ) : null}
+
+                          {campaign.subtitle ? (
+                            <H2
+                              customCss={css`
+                                font-size: ${pixelToRem(22)};
+        
+                                @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                                  font-size: ${pixelToRem(26)};
+                                }
+                              `}
+                            >{campaign.subtitle}</H2>
+                          ) : null}
+                        </HGroup>
                       ) : null}
+                      
+                      <P
+                        customCss={css`
+                          font-size: ${pixelToRem(20)};
+                          font-family: ${(props) => props.theme.font.family.primary.normal};
+                          line-height: 140%;
+                          color: white;
+                          text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
 
-                      {data[campaign].subtitle ? (
-                        <H2>{data[campaign].subtitle}</H2>
-                      ) : null}
-                    </HGroup>
-                  ) : null}
-                  
-                  <P
-                    customCss={css`
-                      font-size: ${pixelToRem(20)};
-                      font-family: ${(props) => props.theme.font.family.primary.normal};
-                      line-height: 140%;
-                      color: white;
-                      text-shadow: rgba(0, 0, 0, 0.9) 0 0 ${pixelToRem(2)};
+                          @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
+                            font-size: ${pixelToRem(22)};
+                          }
 
-                      @media (min-width: ${({theme}) => pixelToRem(theme.responsive.tablet.minWidth)}) {
-                        font-size: ${pixelToRem(22)};
-                      }
-
-                      p {
-                        margin-bottom: ${pixelToRem(20)};
-                      }
-                    `}
-                    dangerouslySetInnerHTML={{__html: data[campaign].description}}
-                  />
-                </>
-              ) : null
-            }
-            
-          </Wrapper>
-        </SideWrapper>
-        <SideWrapper campaign={queryParams.get('campaign') || ''}>
-          <Switch>
-            <Route path={`${path}/step/:stepId`}>
-              <RegistrationForm/>
-            </Route>
-            <Redirect from={path} to={{
-              pathname: `${path}/step/1`,
-              search: queryParams.toString(),
-            }} />
-          </Switch>
-        </SideWrapper>
+                          p {
+                            margin-bottom: ${pixelToRem(20)};
+                          }
+                        `}
+                        dangerouslySetInnerHTML={{__html: campaign.description}}
+                      />
+                    </>
+                  ) : null
+                }
+              </Wrapper>
+            </SideWrapper>
+            <SideWrapper campaign={campaign.slug}>
+              <Switch>
+                <Route path={`${path}/step/:stepId`}>
+                  <RegistrationForm/>
+                </Route>
+                <Redirect from={path} to={{
+                  pathname: `${path}/step/1`,
+                  search: queryParams.toString(),
+                }} />
+              </Switch>
+            </SideWrapper>
+            </>
+          ) : null
+        }
       </Wrapper>
       <Topics />
     </View>

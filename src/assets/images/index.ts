@@ -13,6 +13,7 @@ import CampaignClimaYEnergia from './campaigns/clima-y-energia.jpg';
 import CampaignContaminacion from './campaigns/contaminacion.jpg';
 import CampaignOceanos from './campaigns/oceanos.jpg';
 import CampaignDeltaDelParana from './campaigns/delta-del-parana.jpg';
+import CampaignSustentabilidad from './campaigns/sustentabilidad.jpg';
 
 export {
   BackgroundHome,
@@ -30,4 +31,5 @@ export {
   CampaignContaminacion,
   CampaignOceanos,
   CampaignDeltaDelParana,
+  CampaignSustentabilidad,
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wrapper, H1, Span, A } from '@bit/meema.ui-components.elements';
 import { css } from 'styled-components';
-import { pixelToRem } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 
 export const Topic: React.FunctionComponent<{
   to: string;

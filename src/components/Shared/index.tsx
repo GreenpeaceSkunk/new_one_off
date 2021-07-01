@@ -4,6 +4,7 @@ import { Wrapper, Img, A } from '@bit/meema.ui-components.elements';
 import ThreeCircles from '@bit/meema.ui-components.loaders.three-circles';
 import { css } from 'styled-components';
 import { pixelToRem } from 'meema.utils';
+import Form from '../Shared/Form';
 
 export const Logo = () => (
   <A
@@ -18,6 +19,7 @@ export const Logo = () => (
       }}
       width='10rem'
       height='auto'
+      loading='lazy'
     />
   </A>
 );
@@ -40,3 +42,7 @@ export const Loader = () => (
     />
   </Wrapper>
 )
+
+export {
+  Form,
+};
