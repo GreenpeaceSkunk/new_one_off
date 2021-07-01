@@ -1,28 +1,54 @@
-import React, { memo, useContext, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+// import { Input, FormWrapperStep, FormLabel, FormGroup, Select } from '../Shared';
 import { Input, FormWrapperStep, FormLabel, FormGroup, Select } from '../Shared';
-import { RegistrationContext } from '../context';
+import { FormContext } from '../context';
 import { css } from 'styled-components';
 import { Label, Wrapper } from '@bit/meema.ui-components.elements';
+import { OnChangeEvent } from '../../../types';
+
+const defaultAmounts = ['99', '699', '1999', '2999'];
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
-  const {
+  // const {
+  //   data: {
+  //     cod_area,
+  //     email,
+  //     nombre,
+  //     apellido,
+  //     otherAmount,
+  //     telefono,
+  //     monto,
+  //   },
+  //   defaultAmounts,
+  //   onChange,
+  // } = useContext(FormContext);
+  const { 
     data: {
       user: {
-        cod_area,
         email,
         nombre,
         apellido,
+        cod_area,
         telefono,
-      }, 
-      donation: {
-        otherAmount,
+      },
+      donation: { 
         monto,
+        otherAmount,
       },
     },
-    defaultAmounts,
-    onChange,
-  } = useContext(RegistrationContext);
+    dispatch,
+  } = useContext(FormContext);
   const [ disabledOtherAmount, setDisabledOtherAmount ] = useState<boolean>(true);
+  
+  const onChange = useCallback((evt: OnChangeEvent) => {
+    evt.preventDefault();
+    dispatch({
+      type: 'UPDATE_USER_DATA',
+      payload: { [evt.currentTarget.name]: evt.currentTarget.value }
+    });
+  }, [
+    dispatch,
+  ]);
 
   useEffect(() => {
     setDisabledOtherAmount(defaultAmounts.filter((amount: string) => amount === monto).length ? true : false);
@@ -30,7 +56,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     monto,
     defaultAmounts,
   ]);
- 
+
   return useMemo(() => (
     <FormWrapperStep>
       <FormLabel>Elegí con cuánto querés ayudar al planeta:</FormLabel>
@@ -134,6 +160,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     disabledOtherAmount,
     defaultAmounts,
     onChange,
+    dispatch,
   ]);
 }
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { css } from 'styled-components';
 import { Wrapper, H1 } from '@bit/meema.ui-components.elements';
-import { pixelToRem } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import { Topic } from './Topic';
 import {
   TopicBackground1,

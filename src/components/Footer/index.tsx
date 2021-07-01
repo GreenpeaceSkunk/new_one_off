@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { css } from 'styled-components';
-import { Footer, Wrapper, Span, A } from '@bit/meema.ui-components.elements';
-import { pixelToRem, footerHeightNormal } from 'greenpeace-ui-themes';
+import { Footer, Wrapper, Span, A, Img } from '@bit/meema.ui-components.elements';
+import { footerHeightNormal } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import { Logo } from '../../components/Shared';
 import { PeopleIcon } from '../../assets/icons';
 import SocialMediaNavs from '../SocialMediaNav';
@@ -112,7 +113,7 @@ const MainFooter = () => (
           ${alignMiddle};
         `}
       >
-        <img src={PeopleIcon} alt='Greenpeace' />
+        <Img src={PeopleIcon} alt='Greenpeace' loading='lazy' />
       </Wrapper>
       <Span customCss={css`
         font-size: ${pixelToRem(24)};

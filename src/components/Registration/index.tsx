@@ -1,17 +1,21 @@
 import React, { memo, useContext, useMemo } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { css } from 'styled-components';
-import { pixelToRem, colorPrimaryDark } from 'greenpeace-ui-themes';
+import { colorPrimaryDark } from 'greenpeace-ui-themes';
+import { pixelToRem } from 'meema.utils';
 import { Wrapper, H1 } from '@bit/meema.ui-components.elements';
 import Carousel from '@bit/meema.ui-components.carousel';
-import Stepper from '@bit/meema.ui-components.stepper';
 import { SubmitNav, Errors, Form, FormButton } from '../../components/Registration/Shared';
 import { RegistrationContext, RegistrationProvider } from './context';
 import StepOneForm from '../../components/Registration/StepOneForm';
 import StepTwoForm from '../../components/Registration/StepTwoForm';
 import ThreeCircles from '@bit/meema.ui-components.loaders.three-circles';
+import { AppContext } from '../App/context';
+import Stepper from '@bit/meema.ui-components.stepper';
+// import Stepper from '../Stepper';
 
 const Component: React.FunctionComponent<{}> = () => {
+  const { couponType } = useContext(AppContext);
   const {
     currentStep,
     error,
@@ -47,7 +51,15 @@ const Component: React.FunctionComponent<{}> = () => {
             font-size: ${pixelToRem(20)};
             margin-bottom: ${pixelToRem(30)};
           `}
-        >Quiero hacer la donación por única vez</H1>
+        >{
+          (couponType === 'oneoff')
+            ? 'Quiero hacer la donación por única vez'
+            : (couponType === 'regular')
+              ? 'Quiero apoyar con donaciones mensuales'
+              : ''
+          }
+          </H1>
+
         <Stepper
           steps={steps}
           currentStep={currentStep}
@@ -103,6 +115,7 @@ const Component: React.FunctionComponent<{}> = () => {
     error,
     submitting,
     steps,
+    couponType,
     goBack,
     goNext,
   ]);

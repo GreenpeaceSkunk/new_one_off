@@ -1,7 +1,8 @@
-import React, { memo, useContext, useMemo } from 'react';
+import React, { memo, useContext, useMemo, useCallback, } from 'react';
 import { Wrapper } from '@bit/meema.ui-components.elements';
 import { Input, FormWrapperStep, FormLabel } from '../Shared';
-import { RegistrationContext } from '../context';
+import { FormContext } from '../context';
+import { OnChangeEvent } from '../../../types';
 
 const StepOneForm: React.FunctionComponent<{}> = () => {
   const {
@@ -13,8 +14,19 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
         creditCardNumber,
       },
     },
-    onChange,
-  } = useContext(RegistrationContext);
+    // onChange,
+    dispatch,
+  } = useContext(FormContext);
+
+  const onChange = useCallback((evt: OnChangeEvent) => {
+    evt.preventDefault();
+    // dispatch({
+    //   type: 'UPDATE_USER_DATA',
+    //   payload: { [evt.currentTarget.name]: evt.currentTarget.value }
+    // });
+  }, [
+    dispatch,
+  ]);
 
   return useMemo(() => (
     <FormWrapperStep>
@@ -30,6 +42,7 @@ const StepOneForm: React.FunctionComponent<{}> = () => {
     creditCardNumber,
     dni,
     onChange,
+    dispatch,
   ]);
 }
 

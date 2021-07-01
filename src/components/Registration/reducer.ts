@@ -1,37 +1,32 @@
-import {SharedState, SharedActions, GenericReducerFn, IUserData} from 'greenpeace';
+import {FormState, SharedActions, GenericReducerFn, IUserData, IData, IPayment} from 'greenpeace';
 
-export type ContextStateType = SharedState;
+export type ContextStateType = FormState;
 
 export type ContextActionType = 
 | { type: 'UPDATE_USER_DATA', payload: { [x: string]: string | number }}
+| { type: 'UPDATE_PAYMENT_DATA', payload: { [x: string]: string | number }}
 | { type: 'SET_ERROR', error: string | null }
 | SharedActions;
 
 export const initialState: ContextStateType = {
   data: {
-    cod_area: '',
-    dni: '',
-    creditCardNumber: '',
-    campania: '',
-    email: '',
-    nombre: '',
-    apellido: '',
-    otherAmount: '',
-    telefono: '',
-    monto: '',
-  } as IUserData,
-  // data: {
-  //   cod_area: '011',
-  //   dni: '10029128',
-  //   creditCardNumber: '1111000011110000',
-  //   campania: '',
-  //   email: 'doe.deer@email.com',
-  //   nombre: 'Doe',
-  //   apellido: 'Deer',
-  //   otherAmount: '',
-  //   telefono: '20000000',
-  //   monto: '',
-  // } as IUserData,
+    user: {
+      cod_area: '',
+      dni: '',
+      email: '',
+      nombre: '',
+      apellido: '',
+      otherAmount: '',
+      telefono: '',
+      monto: '',
+    } as IUserData,
+    donation: {
+      amount: 0,
+      creditCardNumber: '',
+      monto: '',
+      otherAmount: '',
+    } as IPayment,
+  },
   submitting: false,
   submitted: false,
   error: null,
@@ -44,14 +39,28 @@ export const reducer: GenericReducerFn<ContextStateType, ContextActionType> = (s
         ...state,
         data: {
           ...state.data,
-          ...action.payload,
-          ...(action.payload['monto']) && {
-            otherAmount: '',
+          user: {
+            ...state.data.user,
+            ...action.payload,
           },
-          ...(action.payload['monto'] && action.payload['otherAmount']) && {
-            otherAmount: action.payload['otherAmount'],
+        } as IData,
+      }
+    case 'UPDATE_PAYMENT_DATA':
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          donation: {
+            ...state.data.donation,
+            ...action.payload,
+            ...(action.payload['monto']) && {
+              otherAmount: '',
+            },
+            ...(action.payload['monto'] && action.payload['otherAmount']) && {
+              otherAmount: action.payload['otherAmount'],
+            },
           },
-        } as IUserData,
+        } as IData,
       }
     case 'SUBMIT':
       return {

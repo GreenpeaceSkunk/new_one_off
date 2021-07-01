@@ -1,4 +1,4 @@
-import { Nav } from '@bit/meema.ui-components.elements';
+import { Nav, Img } from '@bit/meema.ui-components.elements';
 import React, { FunctionComponent } from 'react';
 import {
   EmailShareButton,
@@ -34,7 +34,7 @@ const SocialMediaNavs: FunctionComponent<{}> = () => {
         windowHeight={SHARE_MODAL_HEIGHT}
         windowWidth={SHARE_MODAL_WIDTH}
       >
-        <img src={TwitterLogo} alt='Twitter' width='auto' height='auto' />
+        <Img src={TwitterLogo} alt='Twitter' width='auto' height='auto' loading='lazy' />
       </TwitterShareButton>
 
       <WhatsappShareButton
@@ -44,7 +44,7 @@ const SocialMediaNavs: FunctionComponent<{}> = () => {
         windowHeight={SHARE_MODAL_HEIGHT}
         windowWidth={SHARE_MODAL_WIDTH}
       >
-        <img src={WhatsappLogo} alt='Whatsapp' width='auto' height='auto' />
+        <Img src={WhatsappLogo} alt='Whatsapp' width='auto' height='auto' loading='lazy' />
       </WhatsappShareButton>
       
       <FacebookShareButton
@@ -53,7 +53,7 @@ const SocialMediaNavs: FunctionComponent<{}> = () => {
         windowHeight={SHARE_MODAL_HEIGHT}
         windowWidth={SHARE_MODAL_WIDTH}
       >
-        <img src={FacebookLogo} alt='Facebook' width='auto' height='auto' />
+        <Img src={FacebookLogo} alt='Facebook' width='auto' height='auto' loading='lazy' />
       </FacebookShareButton>
 
       <EmailShareButton
@@ -64,7 +64,7 @@ const SocialMediaNavs: FunctionComponent<{}> = () => {
         windowHeight={SHARE_MODAL_HEIGHT}
         windowWidth={SHARE_MODAL_WIDTH}
       >
-        <img src={EmailLogo} alt='Email' width='auto' height='auto' />
+        <Img src={EmailLogo} alt='Email' width='auto' height='auto' loading='lazy' />
       </EmailShareButton>
       
     </Nav>
