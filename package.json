@@ -46,7 +46,7 @@
     "client:env:development": "cp .env.development.sample .env.development",
     "client:env:production": "cp .env.production.sample .env.production",
     "build:version": "npm run build:version:id && npm run build:version:date && npm run build:author",
-    "build:version:id": "VERSION_BUILD=$(git describe --long) && sed -i -- 's/%VERSION_BUILD%/'$VERSION_BUILD'/g' ./build/index.html",
+    "build:version:id": "CURRENT_BRANCH=$(git branch --show-current) && VERSION_BUILD=$(git describe --long) && sed -i -- 's/%VERSION_BUILD%/'$CURRENT_BRANCH--$VERSION_BUILD'/g' ./build/index.html",
     "build:version:date": "VERSION_BUILD_DATE=$(date +%Y-%m-%d)-$(date +%T) && sed -i -- 's/%VERSION_BUILD_DATE%/'$VERSION_BUILD_DATE'/g' ./build/index.html",
     "build:author": "BUILD_AUTHOR=$(git config --global user.email) && sed -i -- 's/%BUILD_AUTHOR%/'$BUILD_AUTHOR'/g' ./build/index.html",
     "stylelint": "npx stylelint '**/*.css'",
