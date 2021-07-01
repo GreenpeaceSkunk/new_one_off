@@ -7,7 +7,7 @@
     "email": "dtovbein@gmail.com",
     "url": "https://github.com/dantovbein"
   },
-  "homepage": "/sk/one_off/",
+  "homepage": "/sk/one-off/",
   "dependencies": {
     "@analytics/google-analytics": "^0.5.2",
     "@bit/meema.gpar-ui-components.form": "0.0.2",
