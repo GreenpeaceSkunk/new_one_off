@@ -38,7 +38,7 @@ interface IProps {
   children: React.ReactNode | HTMLAllCollection;
 }
 
-const steps:string[] = ['Paso 1', 'Paso 2'];
+const steps:string[] = ['Datos personales', 'Tu donación'];
 const defaultAmounts = ['99', '699', '1999', '2999'];
 
 const Context = createContext({} as IContext);
