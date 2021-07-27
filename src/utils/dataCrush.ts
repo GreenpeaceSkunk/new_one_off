@@ -35,6 +35,9 @@ export const initializeTrackEvent = async () => {
   })();
 }
 
-export const trackEvent = () => {
-  window.dc.track.event(`${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`, `${process.env.REACT_APP_DATA_CRUSH_EVENT_ID}`);
+export const trackEvent = (eventId: string) => {
+  if(window.dc.track) {
+    console.log('Track event', eventId);
+    window.dc.track.event(`${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`, eventId);
+  }
 };

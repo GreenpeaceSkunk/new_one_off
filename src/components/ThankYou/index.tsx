@@ -12,9 +12,7 @@ import { trackEvent as trackDataCrushEvent } from '../../utils/dataCrush';
 const ThankYou: React.FunctionComponent<{}> = () => {
   useEffect(() => {
     trackFacebookPixelEvent('Donate');
-    if(window.dc) {
-      trackDataCrushEvent();
-    }
+    trackDataCrushEvent(`${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_THANK_YOU_PAGE}`);
   }, []);
   
   return useMemo(() => (
