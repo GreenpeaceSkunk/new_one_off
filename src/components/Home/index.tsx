@@ -1,10 +1,9 @@
-import React, { memo, useContext, useMemo, useEffect, useState, } from 'react';
+import React, { memo, useContext, useMemo } from 'react';
 import { Redirect, Route, Switch, useRouteMatch, withRouter } from 'react-router';
 import { Wrapper, H1, H2, P, View } from '@bit/meema.ui-components.elements';
 import { pixelToRem } from 'meema.utils';
 import styled, { css } from 'styled-components';
 import RegistrationForm from '../Registration';
-// import RegistrationForm from '../Forms';
 import Topics from './Topics';
 import {
   BackgroundHome,
