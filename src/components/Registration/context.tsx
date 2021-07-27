@@ -15,7 +15,7 @@ import {
   parseAmount,
 } from './utils';
 import { AppContext } from '../App/context';
-import { synchroInit } from '../../utils/dataCrush';
+import { synchroInit, trackEvent as trackDataCrushEvent } from '../../utils/dataCrush';
 
 type OnChangeEvent = MouseEvent<HTMLButtonElement> | ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>;
 
@@ -179,6 +179,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           if(resStep1 && resStep1.post_id) {
             setPostId(resStep1.post_id);
             submitted = resStep1.submitted;
+            trackDataCrushEvent(`${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_1}`);
           }
           break;
         case 2:
@@ -212,6 +213,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
               sk_oneoff_monto: newAmount,
               sk_pre_socio: '0',
             });
+            trackDataCrushEvent(`${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_2}`);
           }
           break;
       }
