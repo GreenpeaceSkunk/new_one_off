@@ -1,4 +1,4 @@
-import {AppState, SharedActions, GenericReducerFn, IUserData, ICampaign, CouponType} from 'greenpeace';
+import {AppState, SharedActions, GenericReducerFn, ICampaign, CouponType} from 'greenpeace';
 
 export type ContextStateType = AppState;
 

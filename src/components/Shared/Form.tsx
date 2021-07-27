@@ -242,7 +242,7 @@ export const Select = styled(Elements.Select)<{width?: string, marginRight?: str
   cursor: pointer;
 `;
 
-export default {
+const _ = {
   Button,
   Content,
   Group,
@@ -258,3 +258,4 @@ export default {
   TextArea,
   Title,
 };
+export default _;

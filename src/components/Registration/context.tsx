@@ -1,5 +1,5 @@
 import React, { createContext, FormEvent, useCallback, useEffect, useMemo, useReducer, useState, MouseEvent, ChangeEvent, useContext } from 'react';
-import { IData, IUserData } from 'greenpeace';
+import { IData } from 'greenpeace';
 import { useParams, withRouter, RouteComponentProps, useHistory } from 'react-router';
 import { ContextActionType, initialState, reducer } from './reducer';
 import { submitDataWithSteps, IResponse } from './service';
