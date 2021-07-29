@@ -35,19 +35,34 @@ export const initialState: ContextStateType = {
     // } as IUserData,
   data: {
     user: {
-      cod_area: '011',
-      dni: '102930192',
-      email: 'doe.deer@email.com',
-      nombre: 'Doe',
-      apellido: 'Deer',
-      telefono: '44440000',
+      cod_area: '',
+      dni: '',
+      email: '',
+      nombre: '',
+      apellido: '',
+      telefono: '',
     },
     donation: {
       amount: 0,
       monto: '',
-      creditCardNumber: '1111222233334444',
-      otherAmount: '100',
+      creditCardNumber: '',
+      otherAmount: '',
     },
+  // data: {
+  //   user: {
+  //     cod_area: '011',
+  //     dni: '102930192',
+  //     email: 'doe.deer@email.com',
+  //     nombre: 'Doe',
+  //     apellido: 'Deer',
+  //     telefono: '44440000',
+  //   },
+  //   donation: {
+  //     amount: 0,
+  //     monto: '',
+  //     creditCardNumber: '1111222233334444',
+  //     otherAmount: '100',
+  //   },
   },
   // data: {
   //   user: {

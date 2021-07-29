@@ -179,7 +179,14 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
           if(resStep1 && resStep1.post_id) {
             setPostId(resStep1.post_id);
             submitted = resStep1.submitted;
-            trackDataCrushEvent(`${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_1}`);
+            synchroInit({
+              email,
+              first_name: nombre,
+              last_name: apellido,
+              dni,
+              area_code: cod_area,
+              telefono,
+            }, `${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_1}`);
           }
           break;
         case 2:
@@ -202,7 +209,6 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
             refParam
           );
           if(resStep2) {
-            submitted = resStep2.submitted;
             synchroInit({
               email,
               first_name: nombre,
@@ -212,8 +218,8 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
               telefono,
               sk_oneoff_monto: newAmount,
               sk_pre_socio: '0',
-            });
-            trackDataCrushEvent(`${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_2}`);
+            }, `${process.env.REACT_APP_DATA_CRUSH_EVENT_SK_DONACION_PASO_2}`);
+            submitted = resStep2.submitted;
           }
           break;
       }
@@ -267,7 +273,6 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       type: 'UPDATE_PAYMENT_DATA',
       payload: { 
         monto: (isCustom) ? 'otherAmount' : `${amountParam || '699'}`,
-        // otherAmount: `${amountParam}`,
       },
     });
   }, [
