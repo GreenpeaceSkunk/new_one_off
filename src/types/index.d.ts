@@ -1,5 +1,3 @@
-import { env } from "process";
-
 declare global {
   interface Window {
     dataLayer: [{
@@ -12,7 +10,7 @@ declare global {
 
     dc: {
       track: {
-        event: (portalId: string, eventId: string) => void;
+        event: (portalId: string, eventId: string, userEmail: string) => void;
       }
     };
   }

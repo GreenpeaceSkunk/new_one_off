@@ -14,13 +14,18 @@ export const initializeSynchro = async () => {
   })();
 }
 
-export const synchroInit = async (data = {}) => {
+export const synchroInit = async (data:any = {}, eventId = '') => {
   console.log('Synchro init', data);
   if(window.dcS.synchro) {
     window.dcS.synchro.init({
       portalID: `${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`,
       synchroKey: `${process.env.REACT_APP_DATA_CRUSH_SYNCHRO_KEY}`,
-    }, data, () => {});
+    }, data, () => {
+      console.log('Synchronized');
+      if(eventId !== '') {
+        trackEvent(eventId, data.email || '');
+      }
+    });
   } else {
     console.log('Data Crush Synchro is unvailable');
   }
@@ -35,9 +40,11 @@ export const initializeTrackEvent = async () => {
   })();
 }
 
-export const trackEvent = (eventId: string) => {
-  if(window.dc.track) {
-    console.log('Track event', eventId);
-    window.dc.track.event(`${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`, eventId);
+export const trackEvent = (eventId: string, userEmail = '') => {
+  try {
+    window.dc.track.event(`${process.env.REACT_APP_DATA_CRUSH_PORTAL_ID}`, eventId, userEmail);
+    console.log('Tracked Event %s', eventId);
+  } catch(error: any) {
+    console.log('Error when trying to track Event %s', eventId);
   }
 };
