@@ -39,7 +39,7 @@ interface IProps {
 }
 
 const steps:string[] = ['Datos personales', 'Tu donación'];
-const defaultAmounts = ['99', '699', '1999', '2999'];
+const defaultAmounts = ['699', '799', '1999', '2999'];
 
 const Context = createContext({} as IContext);
 Context.displayName = 'RegistrationContext';
