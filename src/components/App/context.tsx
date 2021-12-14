@@ -58,7 +58,9 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
         ] as const) ? data[queryParams.get('campaign') as CampaignType] : data['default'],
       });
     }
-  }, []);
+  }, [
+    queryParams,
+  ]);
 
   return useMemo(() => (
     <Provider value={{

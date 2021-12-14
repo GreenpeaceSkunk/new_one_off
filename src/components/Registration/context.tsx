@@ -15,7 +15,7 @@ import {
   parseAmount,
 } from './utils';
 import { AppContext } from '../App/context';
-import { synchroInit, trackEvent as trackDataCrushEvent } from '../../utils/dataCrush';
+import { synchroInit } from '../../utils/dataCrush';
 
 type OnChangeEvent = MouseEvent<HTMLButtonElement> | ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>;
 
@@ -276,6 +276,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
       },
     });
   }, [
+    queryParams,
   ]);
 
   return useMemo(() => (
