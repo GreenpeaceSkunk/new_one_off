@@ -279,7 +279,7 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
     dispatch({
       type: 'UPDATE_PAYMENT_DATA',
       payload: { 
-        monto: (isCustom) ? 'otherAmount' : `${amountParam || '699'}`,
+        monto: (isCustom) ? 'otherAmount' : `${amountParam || '1999'}`,
         ...{...isCustom && {
           otherAmount: `${amountParam}`,
         }}
