@@ -8,9 +8,11 @@ export type ContextActionType =
 | { type: 'SET_ERROR', error: string | null }
 | SharedActions;
 
+const autofill = process.env.REACT_APP_AUTOFILL_VALUES ? (process.env.REACT_APP_AUTOFILL_VALUES === 'true') ? true : false : false;
+
 export const initialState: ContextStateType = {
   data: {
-    user: {
+    user: {    
       cod_area: '',
       dni: '',
       email: '',
@@ -19,12 +21,25 @@ export const initialState: ContextStateType = {
       otherAmount: '',
       telefono: '',
       monto: '',
+      ...(autofill && {
+        cod_area: '011',
+        dni: '12345678',
+        email: 'doe.deer@email.com',
+        nombre: 'Doe',
+        apellido: 'Deer',
+        otherAmount: '',
+        telefono: '1560001111',
+        monto: '',
+      }),
     } as IUserData,
     donation: {
       amount: 0,
       creditCardNumber: '',
       monto: '',
       otherAmount: '',
+      ...(autofill && {
+        creditCardNumber: '4444222266668888',
+      }),
     } as IPayment,
   },
   submitting: false,
