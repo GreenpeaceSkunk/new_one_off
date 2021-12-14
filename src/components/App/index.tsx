@@ -10,7 +10,7 @@ import { Loader } from '../Shared'
 
 const AppRouter = lazy(() => import('./router'));
 
-if(process.env.NODE_ENV === 'production') {
+if(process.env.REACT_APP_ENVIRONMENT === 'production') {
   initializeTagManager();
   inititalizeAnalytics();
   initializeFacebookPixel();
@@ -21,7 +21,7 @@ const Component: React.FunctionComponent<{}> = memo(() => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if(process.env.NODE_ENV === 'production') {
+    if(process.env.REACT_APP_ENVIRONMENT === 'production') {
       trackEvent('PageView');
       pushToDataLayer('pageview');
       trackPage("", pathname, "");
