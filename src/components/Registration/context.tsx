@@ -273,17 +273,19 @@ const ContextProvider: React.FunctionComponent<IProps & RouteComponentProps> = (
   ]);
 
   useEffect(() => {
-    const amountParam = queryParams.get('default');
-    const isCustom = (amountParam && !defaultAmounts.filter((amount: string) => amount === amountParam).length) ? true : false; 
+    const amountParam = queryParams.get('monto');
+    const isCustom = (amountParam && !defaultAmounts.filter((amount: string) => amount === amountParam).length) ? true : false;
+  
     dispatch({
       type: 'UPDATE_PAYMENT_DATA',
       payload: { 
         monto: (isCustom) ? 'otherAmount' : `${amountParam || '699'}`,
+        ...{...isCustom && {
+          otherAmount: `${amountParam}`,
+        }}
       },
     });
-  }, [
-    queryParams,
-  ]);
+  }, []);
 
   return useMemo(() => (
     <Provider value={{
